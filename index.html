@@ -6,7 +6,7 @@
 <title>Vrushil Patel – Software Developer</title>
 <meta name="description" content="Vrushil Patel — Software Developer specializing in backend systems, data engineering, and APIs. Honours CS graduate from University of Manitoba.">
 <meta property="og:title" content="Vrushil Patel – Software Developer">
-<meta property="og:description" content="Backend engineer with experience at IGM Financial, Priceline, and Pollard Banknote. Go, Python, Ruby on Rails, GraphQL, SQL.">
+<meta property="og:description" content="Full-stack & backend engineer at Norima Consulting. Experience at IG Wealth Management, Priceline, and more. Next.js, TypeScript, Go, Ruby on Rails, Python, GraphQL.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://vrushilpatel.dev">
@@ -146,6 +146,7 @@ section{position:relative;z-index:1;padding:8rem 4rem}
 .fact-title{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.25rem}
 .fact-value{font-weight:500;color:var(--text);font-size:.9rem}
 
+/* TIMELINE */
 .timeline{position:relative;padding-left:2rem}
 .timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--border)}
 .tl-item{position:relative;margin-bottom:3rem;opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}
@@ -160,6 +161,7 @@ section{position:relative;z-index:1;padding:8rem 4rem}
 .tech-tags{display:flex;flex-wrap:wrap;gap:.4rem}
 .tag{font-size:.72rem;padding:.25rem .65rem;border-radius:3px;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--muted);letter-spacing:.03em}
 
+/* PROJECTS */
 .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
 .project-card{
   background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.75rem;
@@ -183,6 +185,7 @@ section{position:relative;z-index:1;padding:8rem 4rem}
 .project-card.dashed:hover{transform:none;border-color:var(--border)}
 .project-card.dashed::before{display:none}
 
+/* SKILLS */
 .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem}
 .skill-group{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.5rem}
 .skill-group-title{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
@@ -190,6 +193,21 @@ section{position:relative;z-index:1;padding:8rem 4rem}
 .skill-item:last-child{border-bottom:none}
 .skill-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
 
+/* CERTS */
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;margin-top:3rem}
+.cert-card{
+  background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.25rem 1.5rem;
+  display:flex;align-items:flex-start;gap:1rem;
+  transition:border-color .2s,transform .2s;
+}
+.cert-card:hover{border-color:rgba(255,255,255,.15);transform:translateY(-2px)}
+.cert-icon{font-size:1.5rem;flex-shrink:0;margin-top:.1rem}
+.cert-body{}
+.cert-name{font-size:.9rem;font-weight:500;color:var(--text);margin-bottom:.2rem;line-height:1.3}
+.cert-issuer{font-size:.78rem;color:var(--muted)}
+.cert-date{font-size:.72rem;color:var(--accent);margin-top:.2rem}
+
+/* CONTACT */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
 .contact-info h3{font-family:'DM Serif Display',serif;font-size:1.8rem;margin-bottom:1rem;color:var(--text)}
 .contact-info p{color:var(--muted);line-height:1.8;margin-bottom:2rem}
@@ -213,6 +231,7 @@ input::placeholder,textarea::placeholder{color:var(--muted);opacity:.5}
 .form-status.success{display:block;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);color:#86efac}
 .form-status.error{display:block;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#fca5a5}
 
+/* TERMINAL */
 .terminal{background:#0d0d14;border:1px solid var(--border);border-radius:8px;overflow:hidden;max-width:600px;margin:0 auto}
 .terminal-header{background:var(--card);padding:.75rem 1rem;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid var(--border)}
 .t-dot{width:10px;height:10px;border-radius:50%}
@@ -235,6 +254,18 @@ footer p{font-size:.8rem;color:var(--muted)}
 .reveal.visible{opacity:1;transform:none}
 
 #season-overlay{position:fixed;inset:0;z-index:500;pointer-events:none;opacity:0;transition:opacity .4s;background:radial-gradient(circle at center,var(--accent) 0%,transparent 70%)}
+
+/* CURRENT BADGE */
+.current-badge{
+  display:inline-block;font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:.2rem .55rem;border-radius:3px;
+  background:rgba(96,165,250,.15);border:1px solid rgba(96,165,250,.3);
+  color:var(--accent);margin-left:.5rem;vertical-align:middle;
+}
+body.spring .current-badge{background:rgba(34,197,94,.15);border-color:rgba(34,197,94,.3)}
+body.summer .current-badge{background:rgba(245,158,11,.15);border-color:rgba(245,158,11,.3)}
+body.autumn .current-badge{background:rgba(234,88,12,.15);border-color:rgba(234,88,12,.3)}
+body.winter .current-badge{background:rgba(96,165,250,.15);border-color:rgba(96,165,250,.3)}
 
 @media(max-width:900px){
   nav{padding:1rem 1.5rem}
@@ -293,17 +324,18 @@ footer p{font-size:.8rem;color:var(--muted)}
 
 <main id="main-content">
 
+<!-- HERO -->
 <section id="hero" aria-label="Hero section">
   <div class="hero-content">
     <div class="hero-eyebrow" aria-hidden="true">Software Developer · Winnipeg, MB</div>
     <h1 class="hero-name">Vrushil<br>Patel</h1>
     <p class="hero-title">
-      <span class="type-cycle" id="type-cycle" aria-live="polite" aria-label="Role descriptor">Backend Engineer</span>
+      <span class="type-cycle" id="type-cycle" aria-live="polite">Backend Engineer</span>
       &mdash; building reliable systems that scale
     </p>
     <div class="hero-btns">
       <a href="#contact" class="btn-primary">Get in touch</a>
-      <a href="#experience" class="btn-ghost">View my work</a>
+      <a href="https://linkedin.com/in/vrushilp13" class="btn-ghost" target="_blank" rel="noopener noreferrer">View LinkedIn ↗</a>
     </div>
   </div>
   <div class="scroll-indicator" aria-hidden="true">
@@ -312,16 +344,17 @@ footer p{font-size:.8rem;color:var(--muted)}
   </div>
 </section>
 
+<!-- ABOUT -->
 <section id="about" aria-label="About me">
   <div class="container">
     <div class="section-label" aria-hidden="true">About</div>
     <h2 class="section-title reveal">The person behind<br><em style="font-style:italic;font-family:'DM Serif Display',serif">the code</em></h2>
     <div class="about-grid">
       <div class="about-bio reveal">
-        <p>I'm a <em>Computer Science Honours graduate</em> from the University of Manitoba with a passion for building backend systems that are clean, reliable, and production-ready. I've spent the last two years shipping real code across fintech, travel, and education.</p>
-        <p>My sweet spot is <em>data engineering and backend APIs</em> — whether that's designing ingestion pipelines in Python, migrating legacy Oracle jobs to Go, or wiring up GraphQL mutations with Rails. I care deeply about correctness, traceability, and systems that hold up under load.</p>
-        <p>Beyond the terminal, I volunteer as a full-stack developer on <em>Qstudy</em> — an AI-powered app that transforms studying with short-form videos, flashcards, and AI-generated learning content. I'm always curious about the intersection of software and education.</p>
-        <p>Currently at <em>IGM Financial</em>, building data infrastructure that powers real financial decisions.</p>
+        <p>I'm a <em>Computer Science Honours graduate</em> from the University of Manitoba with a passion for building software that's clean, reliable, and production-ready. I've spent the last three years shipping real code across consulting, fintech, travel, and education.</p>
+        <p>My sweet spot is <em>full-stack development and backend APIs</em> — whether that's building React and Next.js interfaces, wiring up GraphQL mutations in Rails, or writing services in Go. I care deeply about correctness, thoughtful architecture, and systems that hold up under load.</p>
+        <p>Beyond the terminal, I'm passionate about <em>AI-assisted learning tools</em>, having built features for Qstudy — an app that transforms studying with short-form videos, flashcards, and AI-generated content. I'm always curious about the intersection of software and education.</p>
+        <p>Currently an <em>Associate Software Engineer at Norima Consulting</em>, building modern web applications with Next.js and TypeScript.</p>
       </div>
       <div class="fact-cards reveal" role="list" aria-label="Quick facts">
         <div class="fact-card" role="listitem">
@@ -337,17 +370,17 @@ footer p{font-size:.8rem;color:var(--muted)}
         <div class="fact-card" role="listitem">
           <div class="fact-icon" aria-hidden="true">⚡</div>
           <div class="fact-title">Strengths</div>
-          <div class="fact-value">Backend · Data · APIs</div>
+          <div class="fact-value">Full-Stack · Backend · APIs</div>
         </div>
         <div class="fact-card" role="listitem">
           <div class="fact-icon" aria-hidden="true">🌱</div>
           <div class="fact-title">Currently</div>
-          <div class="fact-value">IGM Financial</div>
+          <div class="fact-value">Norima Consulting</div>
         </div>
         <div class="fact-card" role="listitem">
           <div class="fact-icon" aria-hidden="true">🔭</div>
           <div class="fact-title">Interests</div>
-          <div class="fact-value">AI · EdTech · Systems</div>
+          <div class="fact-value">Web · AI · EdTech</div>
         </div>
         <div class="fact-card" role="listitem">
           <div class="fact-icon" aria-hidden="true">📬</div>
@@ -359,194 +392,294 @@ footer p{font-size:.8rem;color:var(--muted)}
   </div>
 </section>
 
+<!-- EXPERIENCE -->
 <section id="experience" aria-label="Work experience">
   <div class="container">
     <div class="section-label" aria-hidden="true">Experience</div>
     <h2 class="section-title reveal">Where I've<br><em style="font-style:italic;font-family:'DM Serif Display',serif">shipped code</em></h2>
     <div class="timeline" role="list" aria-label="Work history timeline">
+
+      <!-- Norima -->
       <article class="tl-item" role="listitem">
         <div class="tl-dot" aria-hidden="true"></div>
-        <div class="tl-period">Jan 2024 – Aug 2024 &nbsp;·&nbsp; Aug 2025 – Present</div>
-        <h3 class="tl-role">Software Developer</h3>
-        <div class="tl-company">IGM Financial &nbsp;·&nbsp; Co-op &amp; Full-time</div>
+        <div class="tl-period">Jul 2026 – Present <span class="current-badge">Current</span></div>
+        <h3 class="tl-role">Associate Software Engineer</h3>
+        <div class="tl-company">Norima Consulting Inc. &nbsp;·&nbsp; Full-time · On-site</div>
         <ul class="tl-bullets" aria-label="Responsibilities">
-          <li>Build data ingestion pipelines using Python loaders and definition files to reliably load raw files into normalized RDL tables</li>
-          <li>Implement complex data transformations, validations, and comparisons to ensure data integrity and consistency across backend systems</li>
-          <li>Write and optimize complex SQL queries involving multi-table joins, lookup tables, filters, and aggregations to retrieve and validate business data</li>
+          <li>Building modern, production-ready web applications using Next.js and TypeScript</li>
+          <li>Working within a consulting environment across diverse client projects and technical domains</li>
         </ul>
         <div class="tech-tags" aria-label="Technologies used">
-          <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">BigQuery</span><span class="tag">ETL</span><span class="tag">Data Pipelines</span>
+          <span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">React</span>
         </div>
       </article>
+
+      <!-- IG Wealth (full-time) -->
       <article class="tl-item" role="listitem">
         <div class="tl-dot" aria-hidden="true"></div>
-        <div class="tl-period">Sept 2024 – Dec 2024</div>
+        <div class="tl-period">Aug 2025 – Jul 2026</div>
         <h3 class="tl-role">Software Developer</h3>
-        <div class="tl-company">Priceline &nbsp;·&nbsp; Co-op</div>
+        <div class="tl-company">IG Wealth Management &nbsp;·&nbsp; Contract Full-time · Hybrid</div>
         <ul class="tl-bullets" aria-label="Responsibilities">
-          <li>Completed three Go migration projects in two weeks — redirecting canceled offer retrieval and refund record lookups from Oracle to BigQuery while updating MySQL tables</li>
-          <li>Implemented data transformation and normalization logic in Go to prepare BigQuery records for relational SQL insertion</li>
-          <li>Applied error handling and logging patterns in Go to detect, trace, and recover from partial batch failures</li>
-          <li>Designed and implemented a GraphQL mutation to securely tokenize payment data using Rails models</li>
-          <li>Improved Ruby on Rails application across models, views, and controllers for partner-facing features</li>
+          <li>Built AI-driven backend workflows in Python to automate manual business processes end-to-end</li>
+          <li>Integrated with real-time Confluent APIs to power downstream services and reporting</li>
+          <li>Designed backend transformation logic with a focus on performance, reliability, and maintainability</li>
+          <li>Wrote and optimized complex SQL to support application features and business logic</li>
+          <li>Collaborated across teams to ship features from requirements through delivery in a hybrid environment</li>
+        </ul>
+        <div class="tech-tags" aria-label="Technologies used">
+          <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Confluent</span><span class="tag">BigQuery</span><span class="tag">REST APIs</span>
+        </div>
+      </article>
+
+      <!-- Priceline -->
+      <article class="tl-item" role="listitem">
+        <div class="tl-dot" aria-hidden="true"></div>
+        <div class="tl-period">Sep 2024 – Dec 2024</div>
+        <h3 class="tl-role">Software Developer Co-op</h3>
+        <div class="tl-company">Priceline &nbsp;·&nbsp; Co-op · Hybrid</div>
+        <ul class="tl-bullets" aria-label="Responsibilities">
+          <li>Completed three Go-lang migration projects in two weeks, redirecting jobs from Oracle to BigQuery while updating MySQL tables</li>
+          <li>Improved GetARoom (Rails application) by implementing filters and buttons, enhancing partner usability and access</li>
+          <li>Paired with a senior developer on card tokenization — contributed to the schema design and integrated a GraphQL mutation within Rails</li>
+          <li>Resolved critical bugs including duplicate refund amounts, room rate discrepancies, and missing deadlines</li>
+          <li>Actively participated in sprint planning: evaluated tasks, created tickets, assigned story points, and established sprint goals</li>
         </ul>
         <div class="tech-tags" aria-label="Technologies used">
           <span class="tag">Go</span><span class="tag">Ruby on Rails</span><span class="tag">GraphQL</span><span class="tag">BigQuery</span><span class="tag">MySQL</span><span class="tag">Oracle</span>
         </div>
       </article>
+
+      <!-- IG Wealth co-op -->
       <article class="tl-item" role="listitem">
         <div class="tl-dot" aria-hidden="true"></div>
-        <div class="tl-period">Jan 2024 – Apr 2025</div>
-        <h3 class="tl-role">Grader</h3>
-        <div class="tl-company">University of Manitoba</div>
+        <div class="tl-period">Jan 2024 – Aug 2024</div>
+        <h3 class="tl-role">Software Developer Co-op</h3>
+        <div class="tl-company">IG Wealth Management &nbsp;·&nbsp; Co-op</div>
         <ul class="tl-bullets" aria-label="Responsibilities">
-          <li>Graded undergraduate CS courses: Computer Programming, Object-Oriented Programming, Artificial Intelligence, and Automata Theory across multiple terms</li>
+          <li>Built a Python script to detect file encodings for customer data files, eliminating a recurring manual step</li>
+          <li>Crafted reusable Python tool packages for seamless CLI and application integration</li>
+          <li>Optimized backend jobs by improving SQL query execution and reducing memory footprint</li>
+          <li>Implemented pre-commit hooks for code quality checks and standardized Python imports repo-wide with isort</li>
+          <li>Automated scheduled publication delivery workflows on Stonebranch</li>
         </ul>
         <div class="tech-tags" aria-label="Technologies used">
-          <span class="tag">Teaching</span><span class="tag">CS Education</span><span class="tag">AI</span>
+          <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Automation</span>
         </div>
       </article>
+
+      <!-- U of M Grader -->
       <article class="tl-item" role="listitem">
         <div class="tl-dot" aria-hidden="true"></div>
-        <div class="tl-period">May 2023 – Aug 2023</div>
-        <h3 class="tl-role">Programmer Analyst</h3>
-        <div class="tl-company">Pollard Banknote Limited &nbsp;·&nbsp; Co-op</div>
+        <div class="tl-period">Jan 2024 – May 2025</div>
+        <h3 class="tl-role">Computer Science Grader</h3>
+        <div class="tl-company">University of Manitoba &nbsp;·&nbsp; Contract Part-time</div>
         <ul class="tl-bullets" aria-label="Responsibilities">
-          <li>Designed and implemented lottery game logic using C++ OOP principles to enforce ticket restrictions and customer-defined rules</li>
+          <li>Graded COMP 1012 (Computer Programming), COMP 2150 (OOP), COMP 3190 (Artificial Intelligence), and COMP 3030 (Automata Theory)</li>
+          <li>Provided detailed feedback to students and answered questions to support learning</li>
         </ul>
         <div class="tech-tags" aria-label="Technologies used">
-          <span class="tag">C++</span><span class="tag">OOP</span><span class="tag">Game Logic</span>
+          <span class="tag">Java</span><span class="tag">Prolog</span><span class="tag">CS Education</span><span class="tag">AI</span>
         </div>
       </article>
+
+      <!-- Pollard Banknote -->
+      <article class="tl-item" role="listitem">
+        <div class="tl-dot" aria-hidden="true"></div>
+        <div class="tl-period">May 2023 – Sep 2023</div>
+        <h3 class="tl-role">Programmer Analyst Co-op</h3>
+        <div class="tl-company">Pollard Banknote Limited &nbsp;·&nbsp; Co-op · Hybrid</div>
+        <ul class="tl-bullets" aria-label="Responsibilities">
+          <li>Developed and implemented lottery ticket code restrictions in C++ using QT Creator, enforcing customer-defined specifications</li>
+          <li>Used EGG software for parameter setup and ticket layout design</li>
+          <li>Conducted rigorous testing and debugging with Unix/GDB; used XreportViewer to verify statistical compliance</li>
+          <li>Collaborated with the downstream team to resolve issues before final game release</li>
+        </ul>
+        <div class="tech-tags" aria-label="Technologies used">
+          <span class="tag">C++</span><span class="tag">OOP</span><span class="tag">QT Creator</span><span class="tag">Unix</span><span class="tag">GDB</span>
+        </div>
+      </article>
+
     </div>
   </div>
 </section>
 
+<!-- PROJECTS -->
 <section id="projects" aria-label="Projects">
   <div class="container">
     <div class="section-label" aria-hidden="true">Projects</div>
     <h2 class="section-title reveal">Things I've<br><em style="font-style:italic;font-family:'DM Serif Display',serif">built</em></h2>
     <div class="projects-grid">
       <article class="project-card reveal">
-        <div class="project-num">01 · Volunteer</div>
+        <div class="project-num">01 · AI / EdTech</div>
         <h3 class="project-name">Qstudy AI</h3>
-        <p class="project-desc">An AI-powered study platform for students on the go. Features scrolling short educational videos, AI-generated music, stories, flashcards, and quizzes — TikTok meets a personal tutor.</p>
+        <p class="project-desc">Full-stack developer on an AI-powered study platform. Built scrolling short educational videos, AI-generated music, stories, flashcards, and quizzes — TikTok meets a personal tutor.</p>
         <div class="tech-tags" style="margin-bottom:1rem">
           <span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">TailwindCSS</span><span class="tag">FastAPI</span><span class="tag">OpenRouter</span><span class="tag">MaterialUI</span>
         </div>
         <div class="project-links">
-          <a href="#" class="project-link" aria-label="View Qstudy App">→ View App</a>
+          <a href="#" class="project-link">→ View App</a>
         </div>
       </article>
       <article class="project-card reveal">
         <div class="project-num">02 · Data Engineering</div>
         <h3 class="project-name">BigQuery Migration System</h3>
-        <p class="project-desc">Led Go migration of three production jobs at Priceline — redirecting canceled offer retrieval and refund lookups from Oracle to BigQuery with zero downtime. Delivered in two weeks.</p>
+        <p class="project-desc">Led Go migration of three production jobs at Priceline — redirecting canceled offer retrieval and refund lookups from Oracle to BigQuery with zero downtime, delivered in two weeks.</p>
         <div class="tech-tags" style="margin-bottom:1rem">
           <span class="tag">Go</span><span class="tag">BigQuery</span><span class="tag">Oracle</span><span class="tag">MySQL</span>
         </div>
         <div class="project-links">
-          <a href="#experience" class="project-link" aria-label="View Priceline experience">→ Priceline Work</a>
+          <a href="#experience" class="project-link">→ Priceline Work</a>
         </div>
       </article>
       <article class="project-card reveal">
-        <div class="project-num">03 · FinTech</div>
-        <h3 class="project-name">RDL Data Ingestion Framework</h3>
-        <p class="project-desc">Python-based ingestion pipeline framework at IGM Financial that reliably loads raw financial data files into normalized RDL tables with full validation and integrity checks.</p>
+        <div class="project-num">03 · Full-Stack</div>
+        <h3 class="project-name">Next.js Web Applications</h3>
+        <p class="project-desc">Building modern, production-ready web applications at Norima Consulting using Next.js, TypeScript, and React — spanning UI, API routes, and server-side rendering across a range of client engagements.</p>
         <div class="tech-tags" style="margin-bottom:1rem">
-          <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Data Validation</span><span class="tag">ETL</span>
+          <span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">TailwindCSS</span>
         </div>
         <div class="project-links">
-          <a href="#experience" class="project-link" aria-label="View IGM Financial experience">→ IGM Financial</a>
+          <a href="#experience" class="project-link">→ Norima Consulting</a>
         </div>
       </article>
       <article class="project-card reveal">
         <div class="project-num">04 · Backend API</div>
         <h3 class="project-name">Payment Tokenization API</h3>
-        <p class="project-desc">Designed and implemented a secure GraphQL mutation at Priceline to tokenize sensitive payment data and persist tokenized records using Ruby on Rails models with proper security controls.</p>
+        <p class="project-desc">Contributed to the tokenization schema design and integrated a secure GraphQL mutation at Priceline to tokenize payment data, persisting tokenized records via Ruby on Rails models.</p>
         <div class="tech-tags" style="margin-bottom:1rem">
           <span class="tag">GraphQL</span><span class="tag">Ruby on Rails</span><span class="tag">Security</span>
         </div>
         <div class="project-links">
-          <a href="#experience" class="project-link">→ Details</a>
+          <a href="#experience" class="project-link">→ Priceline Work</a>
         </div>
       </article>
       <article class="project-card reveal">
-        <div class="project-num">05 · Systems / Game Dev</div>
-        <h3 class="project-name">Lottery Game Engine</h3>
-        <p class="project-desc">Built from scratch in C++ at Pollard Banknote — enforcing complex ticket restriction logic and customer-defined rules for lottery game mechanics using OOP design principles.</p>
+        <div class="project-num">05 · Backend Automation</div>
+        <h3 class="project-name">AI-Driven Backend Workflows</h3>
+        <p class="project-desc">Built Python backend workflows at IG Wealth that leverage AI and real-time Confluent APIs to automate previously manual business processes end-to-end.</p>
         <div class="tech-tags" style="margin-bottom:1rem">
-          <span class="tag">C++</span><span class="tag">OOP</span><span class="tag">Systems</span>
+          <span class="tag">Python</span><span class="tag">Confluent</span><span class="tag">REST APIs</span><span class="tag">Automation</span>
+        </div>
+        <div class="project-links">
+          <a href="#experience" class="project-link">→ IG Wealth</a>
+        </div>
+      </article>
+      <article class="project-card reveal">
+        <div class="project-num">06 · Systems / Game Dev</div>
+        <h3 class="project-name">Lottery Game Engine</h3>
+        <p class="project-desc">Built C++ ticket restriction logic at Pollard Banknote using QT Creator and OOP principles. Enforced complex customer-defined rules and passed rigorous statistical QA with XreportViewer.</p>
+        <div class="tech-tags" style="margin-bottom:1rem">
+          <span class="tag">C++</span><span class="tag">OOP</span><span class="tag">QT Creator</span><span class="tag">Unix</span>
         </div>
         <div class="project-links">
           <a href="#experience" class="project-link">→ Pollard Banknote</a>
         </div>
       </article>
-      <article class="project-card dashed reveal" aria-hidden="true">
-        <div style="font-size:2rem;margin-bottom:.75rem">🚧</div>
-        <div class="project-num">Next project</div>
-        <div class="project-name" style="font-size:1.1rem;font-family:'DM Serif Display',serif">Always building</div>
-        <p class="project-desc" style="font-size:.85rem;margin-bottom:0">More coming soon</p>
-      </article>
     </div>
   </div>
 </section>
 
+<!-- SKILLS -->
 <section id="skills" aria-label="Technical skills">
   <div class="container">
     <div class="section-label" aria-hidden="true">Skills</div>
     <h2 class="section-title reveal">The tools I<br><em style="font-style:italic;font-family:'DM Serif Display',serif">reach for</em></h2>
     <div class="skills-grid reveal">
-      <div class="skill-group" role="list" aria-label="Programming languages">
+      <div class="skill-group" role="list" aria-label="Languages">
         <div class="skill-group-title">Languages</div>
-        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>Python</div>
-        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>Go (Golang)</div>
-        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>TypeScript</div>
-        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>C++</div>
-        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>Ruby</div>
-        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>SQL</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>Python</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>Go (Golang)</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>TypeScript</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>C++</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>Ruby</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>SQL</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>Java</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>Prolog</div>
       </div>
-      <div class="skill-group" role="list" aria-label="Backend technologies">
-        <div class="skill-group-title">Backend</div>
-        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>Ruby on Rails</div>
-        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>FastAPI</div>
-        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>GraphQL</div>
-        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>REST APIs</div>
-        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>Data Pipelines</div>
-        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>ETL Systems</div>
-      </div>
-      <div class="skill-group" role="list" aria-label="Frontend technologies">
+      <div class="skill-group" role="list" aria-label="Frontend">
         <div class="skill-group-title">Frontend</div>
-        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>React</div>
-        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>Next.js</div>
-        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>TailwindCSS</div>
-        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>MaterialUI</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>Next.js</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>React</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>Redux</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>TailwindCSS</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>MaterialUI</div>
+      </div>
+      <div class="skill-group" role="list" aria-label="Backend">
+        <div class="skill-group-title">Backend</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>Ruby on Rails</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>FastAPI</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>Node.js</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>GraphQL</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>REST APIs</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>JWT / Auth</div>
       </div>
       <div class="skill-group" role="list" aria-label="Databases">
         <div class="skill-group-title">Databases</div>
-        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>BigQuery</div>
-        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>MySQL</div>
-        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>Oracle DB</div>
-        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>PostgreSQL</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>PostgreSQL</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>MySQL</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>BigQuery</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>Oracle DB</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>DynamoDB</div>
       </div>
-      <div class="skill-group" role="list" aria-label="Tools and concepts">
-        <div class="skill-group-title">Tools &amp; Concepts</div>
-        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>Git &amp; GitHub</div>
-        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>LLM APIs / OpenRouter</div>
-        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>OOP Design</div>
-        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>Data Integrity</div>
-        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>Error Handling</div>
-        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>Batch Processing</div>
+      <div class="skill-group" role="list" aria-label="Tools">
+        <div class="skill-group-title">Tools & Platforms</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>AWS (Lambda, DynamoDB)</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>Git &amp; GitHub</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>LLM APIs / OpenRouter</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>Confluent / Kafka</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot"></span>Unix / GDB</div>
+      </div>
+    </div>
+
+    <!-- CERTIFICATIONS -->
+    <div style="margin-top:4rem">
+      <div class="section-label" aria-hidden="true">Certifications</div>
+      <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem);margin-bottom:1.5rem">Always<br><em style="font-style:italic;font-family:'DM Serif Display',serif">learning</em></h3>
+      <div class="certs-grid reveal">
+        <div class="cert-card">
+          <div class="cert-icon">⚛️</div>
+          <div class="cert-body">
+            <div class="cert-name">React – The Complete Guide 2025 (incl. Next.js, Redux)</div>
+            <div class="cert-issuer">Udemy</div>
+            <div class="cert-date">Issued Jun 2025</div>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-icon">☁️</div>
+          <div class="cert-body">
+            <div class="cert-name">AWS Serverless APIs & Apps – A Complete Introduction</div>
+            <div class="cert-issuer">Udemy</div>
+            <div class="cert-date">Issued May 2025</div>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-icon">💎</div>
+          <div class="cert-body">
+            <div class="cert-name">Ruby on Rails 7 Essential Training</div>
+            <div class="cert-issuer">LinkedIn Learning</div>
+            <div class="cert-date">Issued Oct 2024</div>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-icon">🔴</div>
+          <div class="cert-body">
+            <div class="cert-name">Ruby Essential Training Part 1: The Basics</div>
+            <div class="cert-issuer">LinkedIn Learning</div>
+            <div class="cert-date">Issued Sep 2024</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- TERMINAL -->
 <section aria-label="Interactive terminal" style="padding:4rem 4rem">
   <div class="container">
     <div class="section-label" aria-hidden="true">Terminal</div>
     <h2 class="section-title reveal">A little<br><em style="font-style:italic;font-family:'DM Serif Display',serif">about me</em></h2>
-    <div class="terminal reveal" role="region" aria-label="Interactive terminal showing personal info">
+    <div class="terminal reveal" role="region" aria-label="Terminal showing personal info">
       <div class="terminal-header" aria-hidden="true">
         <span class="t-dot t-red"></span>
         <span class="t-dot t-yellow"></span>
@@ -558,6 +691,7 @@ footer p{font-size:.8rem;color:var(--muted)}
   </div>
 </section>
 
+<!-- CONTACT -->
 <section id="contact" aria-label="Contact">
   <div class="container">
     <div class="section-label" aria-hidden="true">Contact</div>
@@ -565,15 +699,15 @@ footer p{font-size:.8rem;color:var(--muted)}
     <div class="contact-grid">
       <div class="contact-info reveal">
         <h3>Open to opportunities</h3>
-        <p>Whether it's a full-time role, an interesting project, or just a conversation about backend engineering and data systems — I'm always happy to connect.</p>
+        <p>Whether it's an exciting full-time role, an interesting project, or just a conversation about backend engineering and data systems — I'm always happy to connect.</p>
         <nav class="social-links" aria-label="Social links">
           <a href="https://github.com/vrushil13" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
             <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
             github.com/vrushil13
           </a>
-          <a href="https://linkedin.com/in/vrushil13" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
+          <a href="https://linkedin.com/in/vrushilp13" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
             <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            linkedin.com/in/vrushil13
+            linkedin.com/in/vrushilp13
           </a>
           <a href="mailto:vrushil13@gmail.com" class="social-link" aria-label="Send email">
             <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
@@ -599,7 +733,6 @@ footer p{font-size:.8rem;color:var(--muted)}
             <label for="message">Message</label>
             <textarea id="message" name="message" rows="5" placeholder="What's on your mind?" required aria-required="true"></textarea>
           </div>
-          <!-- Honeypot anti-spam field -->
           <input type="text" id="hp" name="hp" style="display:none;position:absolute;left:-9999px" tabindex="-1" aria-hidden="true" autocomplete="off">
           <button type="button" class="btn-primary" id="send-btn" onclick="handleContact()">Send message →</button>
           <div class="form-status" id="form-status" role="alert" aria-live="polite"></div>
@@ -620,10 +753,9 @@ footer p{font-size:.8rem;color:var(--muted)}
 <script>
 'use strict';
 
-// Year
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Custom cursor (desktop only)
+// CURSOR
 const cursor = document.getElementById('cursor');
 if (window.matchMedia('(pointer: fine)').matches) {
   document.addEventListener('mousemove', e => {
@@ -634,20 +766,17 @@ if (window.matchMedia('(pointer: fine)').matches) {
     el.addEventListener('mouseenter', () => { cursor.style.width='20px';cursor.style.height='20px';cursor.style.opacity='.5'; });
     el.addEventListener('mouseleave', () => { cursor.style.width='8px';cursor.style.height='8px';cursor.style.opacity='1'; });
   });
-} else {
-  cursor.style.display = 'none';
-}
+} else { cursor.style.display='none'; }
 
-// Scroll progress
+// SCROLL PROGRESS + NAV COMPACT
 const progress = document.getElementById('progress');
 window.addEventListener('scroll', () => {
   const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
   progress.style.width = Math.min(pct, 100) + '%';
-  // Compact nav
   document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 50);
 }, { passive: true });
 
-// Hamburger
+// HAMBURGER
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('nav-menu');
 hamburger.addEventListener('click', () => {
@@ -658,15 +787,15 @@ navMenu.querySelectorAll('a').forEach(a => {
   a.addEventListener('click', () => { navMenu.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); });
 });
 
-// Reveal on scroll
+// REVEAL ON SCROLL
 const revealEls = document.querySelectorAll('.reveal,.tl-item');
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
 }, { threshold: 0.1 });
 revealEls.forEach(el => observer.observe(el));
 
-// Type cycle
-const words = ['Backend Engineer','Data Engineer','Go Developer','Python Developer','Full-Stack Dev','Problem Solver','Systems Thinker','API Craftsman'];
+// TYPE CYCLE
+const words = ['Full-Stack Developer','Backend Engineer','Next.js Developer','React Developer','TypeScript Developer','Go Developer','Python Developer','Problem Solver'];
 let wi=0,ci=0,deleting=false;
 const typeEl = document.getElementById('type-cycle');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -685,12 +814,12 @@ if (!prefersReducedMotion) {
   typeStep();
 }
 
-// Season system
+// SEASONS
 const SEASONS = {
-  spring:{ accent:'#22c55e', accent2:'#f472b6', pColor:[134,239,172], pShape:'petal' },
-  summer:{ accent:'#f59e0b', accent2:'#f97316', pColor:[251,191,36],  pShape:'ray'   },
-  autumn:{ accent:'#ea580c', accent2:'#dc2626', pColor:[249,115,22],  pShape:'leaf'  },
-  winter:{ accent:'#60a5fa', accent2:'#a5f3fc', pColor:[147,197,253], pShape:'snow'  }
+  spring:{ pColor:[134,239,172], pShape:'petal' },
+  summer:{ pColor:[251,191,36],  pShape:'ray'   },
+  autumn:{ pColor:[249,115,22],  pShape:'leaf'  },
+  winter:{ pColor:[147,197,253], pShape:'snow'  }
 };
 let currentSeason = 'winter';
 
@@ -720,7 +849,7 @@ try {
   if (saved && SEASONS[saved]) setSeason(saved);
 } catch(e) {}
 
-// Canvas particles
+// CANVAS PARTICLES
 const canvas = document.getElementById('bg-canvas');
 const ctx = canvas.getContext('2d');
 let particles = [], animFrame;
@@ -757,8 +886,7 @@ function drawParticle(p) {
   ctx.rotate(p.rot);
   const c = `rgba(${p.rgb[0]},${p.rgb[1]},${p.rgb[2]},0.85)`;
   if (p.shape === 'snow') {
-    ctx.strokeStyle = c;
-    ctx.lineWidth = 1;
+    ctx.strokeStyle = c; ctx.lineWidth = 1;
     for (let i=0;i<6;i++){
       ctx.beginPath();
       const a=(i/6)*Math.PI*2;
@@ -805,20 +933,24 @@ window.addEventListener('resize', () => {
 }, { passive: true });
 initParticles();
 
-// Terminal typewriter
+// TERMINAL
 const termLines = [
   {type:'cmd',  text:'whoami'},
-  {type:'out',  text:'vrushil-patel  →  software developer & data engineer'},
+  {type:'out',  text:'vrushil-patel  →  associate software engineer & full-stack developer'},
+  {type:'cmd',  text:'cat current.txt'},
+  {type:'hi',   text:'Norima Consulting Inc. — Associate SWE  ·  Jul 2026 – present'},
   {type:'cmd',  text:'cat skills.txt'},
-  {type:'hi',   text:'Go · Python · Ruby on Rails · GraphQL · SQL · BigQuery · TypeScript · C++'},
+  {type:'hi',   text:'Next.js · TypeScript · React · Go · Ruby on Rails · Python · GraphQL · SQL'},
   {type:'cmd',  text:'cat experience.txt'},
-  {type:'out',  text:'↳ IGM Financial       (Jan 2024–Aug 2024 · Aug 2025–present)'},
-  {type:'out',  text:'↳ Priceline           (Sep 2024–Dec 2024)'},
-  {type:'out',  text:'↳ Pollard Banknote    (May 2023–Aug 2023)'},
+  {type:'out',  text:'↳ Norima Consulting     (Jul 2026–present)'},
+  {type:'out',  text:'↳ IG Wealth Management  (Aug 2025–Jul 2026)'},
+  {type:'out',  text:'↳ Priceline             (Sep 2024–Dec 2024)'},
+  {type:'out',  text:'↳ IG Wealth Management  (Jan 2024–Aug 2024)'},
+  {type:'out',  text:'↳ Pollard Banknote      (May 2023–Sep 2023)'},
   {type:'cmd',  text:'echo $EDUCATION'},
-  {type:'out',  text:'Honours BSc Computer Science — University of Manitoba (2021–2025)'},
+  {type:'out',  text:'BSc Honours Computer Science — University of Manitoba (2021–2025)'},
   {type:'cmd',  text:'echo $STATUS'},
-  {type:'hi',   text:'✓  Open to new opportunities — Winnipeg, MB · vrushil13@gmail.com'},
+  {type:'hi',   text:'✓  vrushil13@gmail.com  ·  Winnipeg, MB  ·  linkedin.com/in/vrushilp13'},
   {type:'cmd',  text:'_'},
 ];
 const termEl = document.getElementById('terminal-body');
@@ -868,15 +1000,12 @@ if (prefersReducedMotion) {
   });
 }
 
-// Contact form
+// CONTACT FORM
 let lastSent = 0;
 function handleContact() {
-  if (document.getElementById('hp').value) return; // honeypot
+  if (document.getElementById('hp').value) return;
   const now = Date.now();
-  if (now - lastSent < 30000) {
-    showStatus('Please wait 30 seconds before sending another message.', false);
-    return;
-  }
+  if (now - lastSent < 30000) { showStatus('Please wait 30 seconds before sending again.', false); return; }
   const name = sanitize(document.getElementById('name').value.trim());
   const email = sanitize(document.getElementById('email').value.trim());
   const msg = sanitize(document.getElementById('message').value.trim());
@@ -887,8 +1016,7 @@ function handleContact() {
   btn.textContent = 'Sending…';
   btn.disabled = true;
   btn.setAttribute('aria-busy','true');
-  // In production: replace with your API call (Resend, EmailJS, etc.)
-  // Example: fetch('/api/contact', { method:'POST', body: JSON.stringify({name,email,msg}) })
+  // Replace this block with EmailJS or Resend for real email sending — see README
   setTimeout(() => {
     lastSent = Date.now();
     btn.textContent = 'Send message →';
@@ -901,9 +1029,7 @@ function handleContact() {
   }, 1200);
 }
 
-function sanitize(str) {
-  return str.replace(/<[^>]*>/g,'').substring(0,2000);
-}
+function sanitize(str) { return str.replace(/<[^>]*>/g,'').substring(0,2000); }
 
 function showStatus(msg, ok) {
   const el = document.getElementById('form-status');
