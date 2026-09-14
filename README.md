@@ -1,2 +1,2 @@
-# vRuShIl13.github.io
+# vrushil13.github.io
 My personal portfolio website
