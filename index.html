@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vrushil Patel – Software Developer</title>
+<meta name="description" content="Vrushil Patel — Software Developer specializing in backend systems, data engineering, and APIs. Honours CS graduate from University of Manitoba.">
+<meta property="og:title" content="Vrushil Patel – Software Developer">
+<meta property="og:description" content="Backend engineer with experience at IGM Financial, Priceline, and Pollard Banknote. Go, Python, Ruby on Rails, GraphQL, SQL.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://vrushilpatel.dev">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --accent:#60a5fa;
+  --accent2:#a5f3fc;
+  --bg:#0a0a0f;
+  --bg2:#111118;
+  --card:#16161f;
+  --border:rgba(255,255,255,0.07);
+  --text:#e8e8f0;
+  --muted:#888;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'DM Sans',sans-serif;
+  font-weight:300;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+body.spring{--accent:#22c55e;--accent2:#f472b6}
+body.summer{--accent:#f59e0b;--accent2:#f97316}
+body.autumn{--accent:#ea580c;--accent2:#dc2626}
+body.winter{--accent:#60a5fa;--accent2:#a5f3fc}
+
+#bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.4}
+
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.2rem 4rem;
+  backdrop-filter:blur(20px);
+  background:rgba(10,10,15,.6);
+  border-bottom:1px solid var(--border);
+  transition:padding .3s;
+}
+nav.scrolled{padding:.8rem 4rem}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:1.4rem;letter-spacing:-.02em;color:var(--text);text-decoration:none}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.85rem;letter-spacing:.05em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-right{display:flex;align-items:center;gap:1rem}
+.season-toggle{
+  display:flex;gap:.4rem;align-items:center;
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--border);
+  border-radius:999px;
+  padding:.3rem .5rem;
+}
+.s-btn{
+  width:28px;height:28px;border-radius:50%;border:none;cursor:pointer;
+  font-size:.8rem;transition:transform .2s,box-shadow .2s;
+  display:flex;align-items:center;justify-content:center;
+}
+.s-btn:hover{transform:scale(1.2)}
+.s-btn.active{box-shadow:0 0 0 2.5px #fff}
+.s-spring{background:linear-gradient(135deg,#86efac,#f9a8d4)}
+.s-summer{background:linear-gradient(135deg,#fbbf24,#f97316)}
+.s-autumn{background:linear-gradient(135deg,#f97316,#dc2626)}
+.s-winter{background:linear-gradient(135deg,#93c5fd,#a5f3fc)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.4rem;background:none;border:none}
+.hamburger span{display:block;width:24px;height:1.5px;background:var(--text);transition:transform .3s,opacity .3s}
+
+section{position:relative;z-index:1;padding:8rem 4rem}
+.container{max-width:1100px;margin:0 auto}
+
+#hero{min-height:100vh;display:flex;align-items:center;padding:0 4rem}
+.hero-content{max-width:800px}
+.hero-eyebrow{
+  font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:.75rem;
+}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--accent)}
+.hero-name{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(3.5rem,8vw,7rem);
+  line-height:1.0;letter-spacing:-.04em;margin-bottom:1rem;
+  background:linear-gradient(135deg,var(--text) 0%,rgba(232,232,240,.4) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:fadeUp .8s ease both;
+}
+.hero-title{
+  font-size:clamp(1rem,2vw,1.4rem);color:var(--muted);
+  margin-bottom:2.5rem;font-weight:300;
+  animation:fadeUp .8s .2s ease both;
+}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp .8s .4s ease both}
+.btn-primary{
+  padding:.8rem 2rem;border-radius:4px;background:var(--accent);color:#fff;
+  font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:500;
+  text-decoration:none;border:none;cursor:pointer;
+  transition:opacity .2s,transform .2s;letter-spacing:.02em;display:inline-block;
+}
+.btn-primary:hover{opacity:.85;transform:translateY(-2px)}
+.btn-ghost{
+  padding:.8rem 2rem;border-radius:4px;background:transparent;color:var(--text);
+  font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:400;
+  text-decoration:none;border:1px solid var(--border);cursor:pointer;
+  transition:border-color .2s,transform .2s;display:inline-block;
+}
+.btn-ghost:hover{border-color:rgba(255,255,255,.3);transform:translateY(-2px)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+
+.scroll-indicator{
+  position:absolute;bottom:3rem;left:4rem;
+  display:flex;align-items:center;gap:.75rem;
+  color:var(--muted);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;
+  animation:fadeUp .8s .7s ease both;
+}
+.scroll-line{width:40px;height:1px;background:var(--muted);animation:scrollPulse 2s infinite}
+@keyframes scrollPulse{0%,100%{opacity:.3;width:40px}50%{opacity:1;width:60px}}
+
+.type-cycle{display:inline-block;min-width:220px;color:var(--accent);font-style:italic;font-family:'DM Serif Display',serif}
+
+.section-label{font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem;display:flex;align-items:center;gap:.75rem}
+.section-label::before{content:'';width:24px;height:1px;background:var(--accent)}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4vw,3rem);letter-spacing:-.03em;line-height:1.1;margin-bottom:3rem;color:var(--text)}
+
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.about-bio{color:var(--muted);font-size:1.05rem;line-height:1.8}
+.about-bio p+p{margin-top:1.2rem}
+.about-bio em{color:var(--accent);font-style:normal}
+.fact-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.fact-card{
+  background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.25rem;
+  transition:border-color .2s,transform .2s;
+}
+.fact-card:hover{border-color:rgba(255,255,255,.15);transform:translateY(-2px)}
+.fact-icon{font-size:1.4rem;margin-bottom:.5rem}
+.fact-title{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.25rem}
+.fact-value{font-weight:500;color:var(--text);font-size:.9rem}
+
+.timeline{position:relative;padding-left:2rem}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--border)}
+.tl-item{position:relative;margin-bottom:3rem;opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}
+.tl-item.visible{opacity:1;transform:none}
+.tl-dot{position:absolute;left:-2.37rem;top:.35rem;width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--bg),0 0 0 4px var(--accent)}
+.tl-period{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.3rem}
+.tl-role{font-size:1.1rem;font-weight:500;color:var(--text);margin-bottom:.1rem}
+.tl-company{font-size:.9rem;color:var(--muted);margin-bottom:.75rem}
+.tl-bullets{list-style:none;margin-bottom:.75rem}
+.tl-bullets li{font-size:.9rem;color:var(--muted);padding:.2rem 0 .2rem 1rem;position:relative;line-height:1.6}
+.tl-bullets li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:.75rem;top:.3rem}
+.tech-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.tag{font-size:.72rem;padding:.25rem .65rem;border-radius:3px;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--muted);letter-spacing:.03em}
+
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+.project-card{
+  background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.75rem;
+  transition:border-color .2s,transform .2s;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.project-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  opacity:0;transition:opacity .3s;pointer-events:none;
+}
+.project-card:hover{border-color:rgba(255,255,255,.18);transform:translateY(-4px)}
+.project-card:hover::before{opacity:.04}
+.project-num{font-size:.72rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem}
+.project-name{font-family:'DM Serif Display',serif;font-size:1.4rem;margin-bottom:.6rem;color:var(--text)}
+.project-desc{font-size:.9rem;color:var(--muted);line-height:1.7;margin-bottom:1.25rem;flex:1}
+.project-links{display:flex;gap:1rem;margin-top:auto}
+.project-link{font-size:.8rem;color:var(--accent);text-decoration:none;letter-spacing:.03em}
+.project-link:hover{text-decoration:underline}
+.project-card.dashed{border-style:dashed;opacity:.5;align-items:center;justify-content:center;min-height:240px;text-align:center}
+.project-card.dashed:hover{transform:none;border-color:var(--border)}
+.project-card.dashed::before{display:none}
+
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem}
+.skill-group{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.5rem}
+.skill-group-title{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+.skill-item{display:flex;align-items:center;gap:.6rem;padding:.4rem 0;color:var(--muted);font-size:.9rem;border-bottom:1px solid var(--border)}
+.skill-item:last-child{border-bottom:none}
+.skill-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
+
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.contact-info h3{font-family:'DM Serif Display',serif;font-size:1.8rem;margin-bottom:1rem;color:var(--text)}
+.contact-info p{color:var(--muted);line-height:1.8;margin-bottom:2rem}
+.social-links{display:flex;flex-direction:column;gap:.5rem}
+.social-link{
+  display:flex;align-items:center;gap:.75rem;color:var(--muted);text-decoration:none;
+  font-size:.9rem;transition:color .2s;padding:.5rem 0;border-bottom:1px solid var(--border);
+}
+.social-link:hover{color:var(--text)}
+.social-icon{width:18px;height:18px;opacity:.5;flex-shrink:0}
+.form-group{margin-bottom:1.25rem}
+label{display:block;font-size:.73rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+input[type="text"],input[type="email"],textarea{
+  width:100%;background:var(--card);border:1px solid var(--border);border-radius:4px;
+  padding:.75rem 1rem;color:var(--text);font-family:'DM Sans',sans-serif;
+  font-size:.95rem;font-weight:300;transition:border-color .2s;outline:none;resize:none;
+}
+input[type="text"]:focus,input[type="email"]:focus,textarea:focus{border-color:var(--accent)}
+input::placeholder,textarea::placeholder{color:var(--muted);opacity:.5}
+.form-status{padding:.75rem 1rem;border-radius:4px;font-size:.85rem;display:none;margin-top:1rem}
+.form-status.success{display:block;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);color:#86efac}
+.form-status.error{display:block;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#fca5a5}
+
+.terminal{background:#0d0d14;border:1px solid var(--border);border-radius:8px;overflow:hidden;max-width:600px;margin:0 auto}
+.terminal-header{background:var(--card);padding:.75rem 1rem;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid var(--border)}
+.t-dot{width:10px;height:10px;border-radius:50%}
+.t-red{background:#ff5f57}.t-yellow{background:#febc2e}.t-green{background:#28c840}
+.terminal-header span{font-size:.8rem;color:var(--muted);margin-left:.5rem}
+.terminal-body{padding:1.5rem;font-family:'Courier New',monospace;font-size:.85rem;line-height:1.9;min-height:200px}
+.t-prompt{color:var(--accent)}
+.t-cmd{color:var(--text)}
+.t-out{color:var(--muted)}
+.t-highlight{color:var(--accent2)}
+
+footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1}
+footer p{font-size:.8rem;color:var(--muted)}
+.footer-logo{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--muted)}
+
+#progress{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:200;transition:width .1s linear;width:0%}
+#cursor{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--accent);pointer-events:none;z-index:999;transform:translate(-50%,-50%);transition:width .2s,height .2s,opacity .2s;mix-blend-mode:screen}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
+.reveal.visible{opacity:1;transform:none}
+
+#season-overlay{position:fixed;inset:0;z-index:500;pointer-events:none;opacity:0;transition:opacity .4s;background:radial-gradient(circle at center,var(--accent) 0%,transparent 70%)}
+
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem}
+  nav.scrolled{padding:.8rem 1.5rem}
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:rgba(10,10,15,.95);border-bottom:1px solid var(--border);padding:1rem 0}
+  .nav-links.open{display:flex}
+  .nav-links li a{padding:.75rem 1.5rem;display:block}
+  .hamburger{display:flex}
+  section{padding:5rem 1.5rem}
+  #hero{padding:0 1.5rem}
+  .about-grid,.contact-grid{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:.75rem;text-align:center;padding:2rem 1.5rem}
+  .scroll-indicator{left:1.5rem}
+}
+@media(max-width:480px){
+  .fact-cards{grid-template-columns:1fr 1fr}
+  .hero-name{font-size:3rem}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  .reveal{opacity:1;transform:none}
+  .tl-item{opacity:1;transform:none}
+}
+</style>
+</head>
+<body class="winter">
+
+<div id="progress" role="progressbar" aria-label="Page scroll progress"></div>
+<div id="cursor" aria-hidden="true"></div>
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+<div id="season-overlay" aria-hidden="true"></div>
+
+<a href="#main-content" class="sr-only" style="position:absolute;left:-9999px;top:1rem;z-index:9999;padding:.5rem 1rem;background:var(--accent);color:#fff;border-radius:4px;text-decoration:none;font-family:'DM Sans',sans-serif">Skip to main content</a>
+
+<nav role="navigation" aria-label="Main navigation">
+  <a href="#hero" class="nav-logo" aria-label="Vrushil Patel - Home">VP</a>
+  <ul class="nav-links" id="nav-menu" role="list">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Work</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="season-toggle" role="group" aria-label="Season theme selector">
+      <button class="s-btn s-spring" data-season="spring" aria-label="Spring theme" aria-pressed="false">🌸</button>
+      <button class="s-btn s-summer" data-season="summer" aria-label="Summer theme" aria-pressed="false">☀️</button>
+      <button class="s-btn s-autumn" data-season="autumn" aria-label="Autumn theme" aria-pressed="false">🍂</button>
+      <button class="s-btn s-winter active" data-season="winter" aria-label="Winter theme" aria-pressed="true">❄️</button>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main id="main-content">
+
+<section id="hero" aria-label="Hero section">
+  <div class="hero-content">
+    <div class="hero-eyebrow" aria-hidden="true">Software Developer · Winnipeg, MB</div>
+    <h1 class="hero-name">Vrushil<br>Patel</h1>
+    <p class="hero-title">
+      <span class="type-cycle" id="type-cycle" aria-live="polite" aria-label="Role descriptor">Backend Engineer</span>
+      &mdash; building reliable systems that scale
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Get in touch</a>
+      <a href="#experience" class="btn-ghost">View my work</a>
+    </div>
+  </div>
+  <div class="scroll-indicator" aria-hidden="true">
+    <span class="scroll-line"></span>
+    <span>Scroll to explore</span>
+  </div>
+</section>
+
+<section id="about" aria-label="About me">
+  <div class="container">
+    <div class="section-label" aria-hidden="true">About</div>
+    <h2 class="section-title reveal">The person behind<br><em style="font-style:italic;font-family:'DM Serif Display',serif">the code</em></h2>
+    <div class="about-grid">
+      <div class="about-bio reveal">
+        <p>I'm a <em>Computer Science Honours graduate</em> from the University of Manitoba with a passion for building backend systems that are clean, reliable, and production-ready. I've spent the last two years shipping real code across fintech, travel, and education.</p>
+        <p>My sweet spot is <em>data engineering and backend APIs</em> — whether that's designing ingestion pipelines in Python, migrating legacy Oracle jobs to Go, or wiring up GraphQL mutations with Rails. I care deeply about correctness, traceability, and systems that hold up under load.</p>
+        <p>Beyond the terminal, I volunteer as a full-stack developer on <em>Qstudy</em> — an AI-powered app that transforms studying with short-form videos, flashcards, and AI-generated learning content. I'm always curious about the intersection of software and education.</p>
+        <p>Currently at <em>IGM Financial</em>, building data infrastructure that powers real financial decisions.</p>
+      </div>
+      <div class="fact-cards reveal" role="list" aria-label="Quick facts">
+        <div class="fact-card" role="listitem">
+          <div class="fact-icon" aria-hidden="true">🎓</div>
+          <div class="fact-title">Education</div>
+          <div class="fact-value">Honours CS, U of Manitoba</div>
+        </div>
+        <div class="fact-card" role="listitem">
+          <div class="fact-icon" aria-hidden="true">🏙️</div>
+          <div class="fact-title">Location</div>
+          <div class="fact-value">Winnipeg, Manitoba</div>
+        </div>
+        <div class="fact-card" role="listitem">
+          <div class="fact-icon" aria-hidden="true">⚡</div>
+          <div class="fact-title">Strengths</div>
+          <div class="fact-value">Backend · Data · APIs</div>
+        </div>
+        <div class="fact-card" role="listitem">
+          <div class="fact-icon" aria-hidden="true">🌱</div>
+          <div class="fact-title">Currently</div>
+          <div class="fact-value">IGM Financial</div>
+        </div>
+        <div class="fact-card" role="listitem">
+          <div class="fact-icon" aria-hidden="true">🔭</div>
+          <div class="fact-title">Interests</div>
+          <div class="fact-value">AI · EdTech · Systems</div>
+        </div>
+        <div class="fact-card" role="listitem">
+          <div class="fact-icon" aria-hidden="true">📬</div>
+          <div class="fact-title">ICM GPA</div>
+          <div class="fact-value">4.0 / 4.5</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience" aria-label="Work experience">
+  <div class="container">
+    <div class="section-label" aria-hidden="true">Experience</div>
+    <h2 class="section-title reveal">Where I've<br><em style="font-style:italic;font-family:'DM Serif Display',serif">shipped code</em></h2>
+    <div class="timeline" role="list" aria-label="Work history timeline">
+      <article class="tl-item" role="listitem">
+        <div class="tl-dot" aria-hidden="true"></div>
+        <div class="tl-period">Jan 2024 – Aug 2024 &nbsp;·&nbsp; Aug 2025 – Present</div>
+        <h3 class="tl-role">Software Developer</h3>
+        <div class="tl-company">IGM Financial &nbsp;·&nbsp; Co-op &amp; Full-time</div>
+        <ul class="tl-bullets" aria-label="Responsibilities">
+          <li>Build data ingestion pipelines using Python loaders and definition files to reliably load raw files into normalized RDL tables</li>
+          <li>Implement complex data transformations, validations, and comparisons to ensure data integrity and consistency across backend systems</li>
+          <li>Write and optimize complex SQL queries involving multi-table joins, lookup tables, filters, and aggregations to retrieve and validate business data</li>
+        </ul>
+        <div class="tech-tags" aria-label="Technologies used">
+          <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">BigQuery</span><span class="tag">ETL</span><span class="tag">Data Pipelines</span>
+        </div>
+      </article>
+      <article class="tl-item" role="listitem">
+        <div class="tl-dot" aria-hidden="true"></div>
+        <div class="tl-period">Sept 2024 – Dec 2024</div>
+        <h3 class="tl-role">Software Developer</h3>
+        <div class="tl-company">Priceline &nbsp;·&nbsp; Co-op</div>
+        <ul class="tl-bullets" aria-label="Responsibilities">
+          <li>Completed three Go migration projects in two weeks — redirecting canceled offer retrieval and refund record lookups from Oracle to BigQuery while updating MySQL tables</li>
+          <li>Implemented data transformation and normalization logic in Go to prepare BigQuery records for relational SQL insertion</li>
+          <li>Applied error handling and logging patterns in Go to detect, trace, and recover from partial batch failures</li>
+          <li>Designed and implemented a GraphQL mutation to securely tokenize payment data using Rails models</li>
+          <li>Improved Ruby on Rails application across models, views, and controllers for partner-facing features</li>
+        </ul>
+        <div class="tech-tags" aria-label="Technologies used">
+          <span class="tag">Go</span><span class="tag">Ruby on Rails</span><span class="tag">GraphQL</span><span class="tag">BigQuery</span><span class="tag">MySQL</span><span class="tag">Oracle</span>
+        </div>
+      </article>
+      <article class="tl-item" role="listitem">
+        <div class="tl-dot" aria-hidden="true"></div>
+        <div class="tl-period">Jan 2024 – Apr 2025</div>
+        <h3 class="tl-role">Grader</h3>
+        <div class="tl-company">University of Manitoba</div>
+        <ul class="tl-bullets" aria-label="Responsibilities">
+          <li>Graded undergraduate CS courses: Computer Programming, Object-Oriented Programming, Artificial Intelligence, and Automata Theory across multiple terms</li>
+        </ul>
+        <div class="tech-tags" aria-label="Technologies used">
+          <span class="tag">Teaching</span><span class="tag">CS Education</span><span class="tag">AI</span>
+        </div>
+      </article>
+      <article class="tl-item" role="listitem">
+        <div class="tl-dot" aria-hidden="true"></div>
+        <div class="tl-period">May 2023 – Aug 2023</div>
+        <h3 class="tl-role">Programmer Analyst</h3>
+        <div class="tl-company">Pollard Banknote Limited &nbsp;·&nbsp; Co-op</div>
+        <ul class="tl-bullets" aria-label="Responsibilities">
+          <li>Designed and implemented lottery game logic using C++ OOP principles to enforce ticket restrictions and customer-defined rules</li>
+        </ul>
+        <div class="tech-tags" aria-label="Technologies used">
+          <span class="tag">C++</span><span class="tag">OOP</span><span class="tag">Game Logic</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="projects" aria-label="Projects">
+  <div class="container">
+    <div class="section-label" aria-hidden="true">Projects</div>
+    <h2 class="section-title reveal">Things I've<br><em style="font-style:italic;font-family:'DM Serif Display',serif">built</em></h2>
+    <div class="projects-grid">
+      <article class="project-card reveal">
+        <div class="project-num">01 · Volunteer</div>
+        <h3 class="project-name">Qstudy AI</h3>
+        <p class="project-desc">An AI-powered study platform for students on the go. Features scrolling short educational videos, AI-generated music, stories, flashcards, and quizzes — TikTok meets a personal tutor.</p>
+        <div class="tech-tags" style="margin-bottom:1rem">
+          <span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">TailwindCSS</span><span class="tag">FastAPI</span><span class="tag">OpenRouter</span><span class="tag">MaterialUI</span>
+        </div>
+        <div class="project-links">
+          <a href="#" class="project-link" aria-label="View Qstudy App">→ View App</a>
+        </div>
+      </article>
+      <article class="project-card reveal">
+        <div class="project-num">02 · Data Engineering</div>
+        <h3 class="project-name">BigQuery Migration System</h3>
+        <p class="project-desc">Led Go migration of three production jobs at Priceline — redirecting canceled offer retrieval and refund lookups from Oracle to BigQuery with zero downtime. Delivered in two weeks.</p>
+        <div class="tech-tags" style="margin-bottom:1rem">
+          <span class="tag">Go</span><span class="tag">BigQuery</span><span class="tag">Oracle</span><span class="tag">MySQL</span>
+        </div>
+        <div class="project-links">
+          <a href="#experience" class="project-link" aria-label="View Priceline experience">→ Priceline Work</a>
+        </div>
+      </article>
+      <article class="project-card reveal">
+        <div class="project-num">03 · FinTech</div>
+        <h3 class="project-name">RDL Data Ingestion Framework</h3>
+        <p class="project-desc">Python-based ingestion pipeline framework at IGM Financial that reliably loads raw financial data files into normalized RDL tables with full validation and integrity checks.</p>
+        <div class="tech-tags" style="margin-bottom:1rem">
+          <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Data Validation</span><span class="tag">ETL</span>
+        </div>
+        <div class="project-links">
+          <a href="#experience" class="project-link" aria-label="View IGM Financial experience">→ IGM Financial</a>
+        </div>
+      </article>
+      <article class="project-card reveal">
+        <div class="project-num">04 · Backend API</div>
+        <h3 class="project-name">Payment Tokenization API</h3>
+        <p class="project-desc">Designed and implemented a secure GraphQL mutation at Priceline to tokenize sensitive payment data and persist tokenized records using Ruby on Rails models with proper security controls.</p>
+        <div class="tech-tags" style="margin-bottom:1rem">
+          <span class="tag">GraphQL</span><span class="tag">Ruby on Rails</span><span class="tag">Security</span>
+        </div>
+        <div class="project-links">
+          <a href="#experience" class="project-link">→ Details</a>
+        </div>
+      </article>
+      <article class="project-card reveal">
+        <div class="project-num">05 · Systems / Game Dev</div>
+        <h3 class="project-name">Lottery Game Engine</h3>
+        <p class="project-desc">Built from scratch in C++ at Pollard Banknote — enforcing complex ticket restriction logic and customer-defined rules for lottery game mechanics using OOP design principles.</p>
+        <div class="tech-tags" style="margin-bottom:1rem">
+          <span class="tag">C++</span><span class="tag">OOP</span><span class="tag">Systems</span>
+        </div>
+        <div class="project-links">
+          <a href="#experience" class="project-link">→ Pollard Banknote</a>
+        </div>
+      </article>
+      <article class="project-card dashed reveal" aria-hidden="true">
+        <div style="font-size:2rem;margin-bottom:.75rem">🚧</div>
+        <div class="project-num">Next project</div>
+        <div class="project-name" style="font-size:1.1rem;font-family:'DM Serif Display',serif">Always building</div>
+        <p class="project-desc" style="font-size:.85rem;margin-bottom:0">More coming soon</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="skills" aria-label="Technical skills">
+  <div class="container">
+    <div class="section-label" aria-hidden="true">Skills</div>
+    <h2 class="section-title reveal">The tools I<br><em style="font-style:italic;font-family:'DM Serif Display',serif">reach for</em></h2>
+    <div class="skills-grid reveal">
+      <div class="skill-group" role="list" aria-label="Programming languages">
+        <div class="skill-group-title">Languages</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>Python</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>Go (Golang)</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>TypeScript</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>C++</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>Ruby</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>SQL</div>
+      </div>
+      <div class="skill-group" role="list" aria-label="Backend technologies">
+        <div class="skill-group-title">Backend</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>Ruby on Rails</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>FastAPI</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>GraphQL</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>REST APIs</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>Data Pipelines</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>ETL Systems</div>
+      </div>
+      <div class="skill-group" role="list" aria-label="Frontend technologies">
+        <div class="skill-group-title">Frontend</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>React</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>Next.js</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>TailwindCSS</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>MaterialUI</div>
+      </div>
+      <div class="skill-group" role="list" aria-label="Databases">
+        <div class="skill-group-title">Databases</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>BigQuery</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>MySQL</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>Oracle DB</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>PostgreSQL</div>
+      </div>
+      <div class="skill-group" role="list" aria-label="Tools and concepts">
+        <div class="skill-group-title">Tools &amp; Concepts</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>Git &amp; GitHub</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>LLM APIs / OpenRouter</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>OOP Design</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>Data Integrity</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>Error Handling</div>
+        <div class="skill-item" role="listitem"><span class="skill-dot" aria-hidden="true"></span>Batch Processing</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section aria-label="Interactive terminal" style="padding:4rem 4rem">
+  <div class="container">
+    <div class="section-label" aria-hidden="true">Terminal</div>
+    <h2 class="section-title reveal">A little<br><em style="font-style:italic;font-family:'DM Serif Display',serif">about me</em></h2>
+    <div class="terminal reveal" role="region" aria-label="Interactive terminal showing personal info">
+      <div class="terminal-header" aria-hidden="true">
+        <span class="t-dot t-red"></span>
+        <span class="t-dot t-yellow"></span>
+        <span class="t-dot t-green"></span>
+        <span>vrushil@portfolio ~ </span>
+      </div>
+      <div class="terminal-body" id="terminal-body" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" aria-label="Contact">
+  <div class="container">
+    <div class="section-label" aria-hidden="true">Contact</div>
+    <h2 class="section-title reveal">Let's work<br><em style="font-style:italic;font-family:'DM Serif Display',serif">together</em></h2>
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <h3>Open to opportunities</h3>
+        <p>Whether it's a full-time role, an interesting project, or just a conversation about backend engineering and data systems — I'm always happy to connect.</p>
+        <nav class="social-links" aria-label="Social links">
+          <a href="https://github.com/vrushil13" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
+            <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            github.com/vrushil13
+          </a>
+          <a href="https://linkedin.com/in/vrushil13" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
+            <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            linkedin.com/in/vrushil13
+          </a>
+          <a href="mailto:vrushil13@gmail.com" class="social-link" aria-label="Send email">
+            <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+            vrushil13@gmail.com
+          </a>
+          <a href="tel:+14313741787" class="social-link" aria-label="Phone number">
+            <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+            +1 (431) 374-1787
+          </a>
+        </nav>
+      </div>
+      <div class="reveal">
+        <form id="contact-form" novalidate aria-label="Contact form">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" autocomplete="name" required aria-required="true">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" autocomplete="email" required aria-required="true">
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="What's on your mind?" required aria-required="true"></textarea>
+          </div>
+          <!-- Honeypot anti-spam field -->
+          <input type="text" id="hp" name="hp" style="display:none;position:absolute;left:-9999px" tabindex="-1" aria-hidden="true" autocomplete="off">
+          <button type="button" class="btn-primary" id="send-btn" onclick="handleContact()">Send message →</button>
+          <div class="form-status" id="form-status" role="alert" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer role="contentinfo">
+  <a href="#hero" class="footer-logo" aria-label="Back to top">Vrushil Patel</a>
+  <p>Designed &amp; built with ♥ · <span id="year"></span></p>
+  <p style="font-size:.75rem;color:var(--muted)">Winnipeg, MB · Open to work</p>
+</footer>
+
+<script>
+'use strict';
+
+// Year
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Custom cursor (desktop only)
+const cursor = document.getElementById('cursor');
+if (window.matchMedia('(pointer: fine)').matches) {
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('a,button,input,textarea').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.style.width='20px';cursor.style.height='20px';cursor.style.opacity='.5'; });
+    el.addEventListener('mouseleave', () => { cursor.style.width='8px';cursor.style.height='8px';cursor.style.opacity='1'; });
+  });
+} else {
+  cursor.style.display = 'none';
+}
+
+// Scroll progress
+const progress = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  progress.style.width = Math.min(pct, 100) + '%';
+  // Compact nav
+  document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 50);
+}, { passive: true });
+
+// Hamburger
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('nav-menu');
+hamburger.addEventListener('click', () => {
+  const open = navMenu.classList.toggle('open');
+  hamburger.setAttribute('aria-expanded', open);
+});
+navMenu.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => { navMenu.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); });
+});
+
+// Reveal on scroll
+const revealEls = document.querySelectorAll('.reveal,.tl-item');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.1 });
+revealEls.forEach(el => observer.observe(el));
+
+// Type cycle
+const words = ['Backend Engineer','Data Engineer','Go Developer','Python Developer','Full-Stack Dev','Problem Solver','Systems Thinker','API Craftsman'];
+let wi=0,ci=0,deleting=false;
+const typeEl = document.getElementById('type-cycle');
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (!prefersReducedMotion) {
+  function typeStep() {
+    const w = words[wi];
+    if (!deleting) {
+      typeEl.textContent = w.slice(0,++ci);
+      if (ci===w.length){deleting=true;setTimeout(typeStep,1800);return;}
+    } else {
+      typeEl.textContent = w.slice(0,--ci);
+      if (ci===0){deleting=false;wi=(wi+1)%words.length;setTimeout(typeStep,300);return;}
+    }
+    setTimeout(typeStep, deleting ? 50 : 80);
+  }
+  typeStep();
+}
+
+// Season system
+const SEASONS = {
+  spring:{ accent:'#22c55e', accent2:'#f472b6', pColor:[134,239,172], pShape:'petal' },
+  summer:{ accent:'#f59e0b', accent2:'#f97316', pColor:[251,191,36],  pShape:'ray'   },
+  autumn:{ accent:'#ea580c', accent2:'#dc2626', pColor:[249,115,22],  pShape:'leaf'  },
+  winter:{ accent:'#60a5fa', accent2:'#a5f3fc', pColor:[147,197,253], pShape:'snow'  }
+};
+let currentSeason = 'winter';
+
+function setSeason(season) {
+  if (!SEASONS[season]) return;
+  const overlay = document.getElementById('season-overlay');
+  overlay.style.opacity = '1';
+  setTimeout(() => {
+    document.body.className = season;
+    currentSeason = season;
+    document.querySelectorAll('.s-btn').forEach(b => {
+      const active = b.dataset.season === season;
+      b.classList.toggle('active', active);
+      b.setAttribute('aria-pressed', active);
+    });
+    try { localStorage.setItem('season', season); } catch(e) {}
+    initParticles();
+    overlay.style.opacity = '0';
+  }, 350);
+}
+
+document.querySelectorAll('.s-btn').forEach(b => {
+  b.addEventListener('click', () => setSeason(b.dataset.season));
+});
+try {
+  const saved = localStorage.getItem('season');
+  if (saved && SEASONS[saved]) setSeason(saved);
+} catch(e) {}
+
+// Canvas particles
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [], animFrame;
+
+function initParticles() {
+  cancelAnimationFrame(animFrame);
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  particles = [];
+  if (prefersReducedMotion) return;
+  const cfg = SEASONS[currentSeason];
+  const count = Math.min(55, Math.floor(window.innerWidth / 22));
+  for (let i = 0; i < count; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: Math.random() * 4 + 2,
+      vx: (Math.random()-.5) * .35,
+      vy: Math.random() * .55 + .15,
+      alpha: Math.random() * .55 + .15,
+      rot: Math.random() * Math.PI * 2,
+      vrot: (Math.random()-.5) * .025,
+      rgb: cfg.pColor,
+      shape: cfg.pShape
+    });
+  }
+  animateParticles();
+}
+
+function drawParticle(p) {
+  ctx.save();
+  ctx.globalAlpha = p.alpha;
+  ctx.translate(p.x, p.y);
+  ctx.rotate(p.rot);
+  const c = `rgba(${p.rgb[0]},${p.rgb[1]},${p.rgb[2]},0.85)`;
+  if (p.shape === 'snow') {
+    ctx.strokeStyle = c;
+    ctx.lineWidth = 1;
+    for (let i=0;i<6;i++){
+      ctx.beginPath();
+      const a=(i/6)*Math.PI*2;
+      ctx.moveTo(0,0);ctx.lineTo(Math.cos(a)*p.size,Math.sin(a)*p.size);
+      ctx.stroke();
+    }
+  } else if (p.shape === 'petal') {
+    ctx.fillStyle = c;
+    ctx.beginPath();
+    ctx.ellipse(0,0,p.size*1.4,p.size*.65,0,0,Math.PI*2);
+    ctx.fill();
+  } else if (p.shape === 'leaf') {
+    ctx.fillStyle = c;
+    ctx.beginPath();
+    ctx.moveTo(0,-p.size);
+    ctx.quadraticCurveTo(p.size*.8,0,0,p.size);
+    ctx.quadraticCurveTo(-p.size*.8,0,0,-p.size);
+    ctx.fill();
+  } else {
+    ctx.fillStyle = c;
+    ctx.beginPath();
+    ctx.arc(0,0,p.size*.6,0,Math.PI*2);
+    ctx.fill();
+  }
+  ctx.restore();
+}
+
+function animateParticles() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p => {
+    p.x+=p.vx; p.y+=p.vy; p.rot+=p.vrot;
+    if (p.y>canvas.height+20){p.y=-20;p.x=Math.random()*canvas.width;}
+    if (p.x<-20) p.x=canvas.width+20;
+    if (p.x>canvas.width+20) p.x=-20;
+    drawParticle(p);
+  });
+  animFrame = requestAnimationFrame(animateParticles);
+}
+
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(initParticles, 200);
+}, { passive: true });
+initParticles();
+
+// Terminal typewriter
+const termLines = [
+  {type:'cmd',  text:'whoami'},
+  {type:'out',  text:'vrushil-patel  →  software developer & data engineer'},
+  {type:'cmd',  text:'cat skills.txt'},
+  {type:'hi',   text:'Go · Python · Ruby on Rails · GraphQL · SQL · BigQuery · TypeScript · C++'},
+  {type:'cmd',  text:'cat experience.txt'},
+  {type:'out',  text:'↳ IGM Financial       (Jan 2024–Aug 2024 · Aug 2025–present)'},
+  {type:'out',  text:'↳ Priceline           (Sep 2024–Dec 2024)'},
+  {type:'out',  text:'↳ Pollard Banknote    (May 2023–Aug 2023)'},
+  {type:'cmd',  text:'echo $EDUCATION'},
+  {type:'out',  text:'Honours BSc Computer Science — University of Manitoba (2021–2025)'},
+  {type:'cmd',  text:'echo $STATUS'},
+  {type:'hi',   text:'✓  Open to new opportunities — Winnipeg, MB · vrushil13@gmail.com'},
+  {type:'cmd',  text:'_'},
+];
+const termEl = document.getElementById('terminal-body');
+let tli=0,tci=0,termStarted=false;
+
+function typeTerminal() {
+  if (tli>=termLines.length) return;
+  const line=termLines[tli];
+  if (tci===0) {
+    const div=document.createElement('div');
+    div.style.lineHeight='1.9';
+    if (line.type==='cmd') {
+      div.innerHTML='<span style="color:var(--accent)">vrushil@dev ~ $ </span><span id="tl-'+tli+'"></span>';
+    } else if (line.type==='hi') {
+      div.innerHTML='<span style="color:var(--accent2)" id="tl-'+tli+'"></span>';
+    } else {
+      div.innerHTML='<span style="color:var(--muted)" id="tl-'+tli+'"></span>';
+    }
+    termEl.appendChild(div);
+  }
+  const span=document.getElementById('tl-'+tli);
+  if (span && tci<=line.text.length) {
+    span.textContent=line.text.slice(0,tci);
+    tci++;
+    setTimeout(typeTerminal, line.type==='cmd'?45:14);
+  } else {
+    tli++;tci=0;
+    setTimeout(typeTerminal, line.type==='cmd'?600:100);
+  }
+}
+
+const termObserver = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting && !termStarted && !prefersReducedMotion) {
+    termStarted=true;
+    typeTerminal();
+    termObserver.disconnect();
+  }
+},{threshold:.3});
+termObserver.observe(termEl);
+if (prefersReducedMotion) {
+  termLines.forEach((line,i) => {
+    const div=document.createElement('div');
+    if (line.type==='cmd') div.innerHTML='<span style="color:var(--accent)">vrushil@dev ~ $ </span><span>'+line.text+'</span>';
+    else if (line.type==='hi') div.innerHTML='<span style="color:var(--accent2)">'+line.text+'</span>';
+    else div.innerHTML='<span style="color:var(--muted)">'+line.text+'</span>';
+    termEl.appendChild(div);
+  });
+}
+
+// Contact form
+let lastSent = 0;
+function handleContact() {
+  if (document.getElementById('hp').value) return; // honeypot
+  const now = Date.now();
+  if (now - lastSent < 30000) {
+    showStatus('Please wait 30 seconds before sending another message.', false);
+    return;
+  }
+  const name = sanitize(document.getElementById('name').value.trim());
+  const email = sanitize(document.getElementById('email').value.trim());
+  const msg = sanitize(document.getElementById('message').value.trim());
+  if (!name||!email||!msg) { showStatus('Please fill in all fields.', false); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showStatus('Please enter a valid email address.', false); return; }
+  if (msg.length > 2000) { showStatus('Message too long (max 2000 characters).', false); return; }
+  const btn = document.getElementById('send-btn');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+  btn.setAttribute('aria-busy','true');
+  // In production: replace with your API call (Resend, EmailJS, etc.)
+  // Example: fetch('/api/contact', { method:'POST', body: JSON.stringify({name,email,msg}) })
+  setTimeout(() => {
+    lastSent = Date.now();
+    btn.textContent = 'Send message →';
+    btn.disabled = false;
+    btn.removeAttribute('aria-busy');
+    showStatus('Message sent! I\'ll get back to you soon. 👋', true);
+    document.getElementById('name').value='';
+    document.getElementById('email').value='';
+    document.getElementById('message').value='';
+  }, 1200);
+}
+
+function sanitize(str) {
+  return str.replace(/<[^>]*>/g,'').substring(0,2000);
+}
+
+function showStatus(msg, ok) {
+  const el = document.getElementById('form-status');
+  el.textContent = msg;
+  el.className = 'form-status ' + (ok?'success':'error');
+  setTimeout(() => { el.className='form-status'; }, 6000);
+}
+</script>
+</body>
+</html>
