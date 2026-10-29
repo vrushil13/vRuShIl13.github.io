@@ -4,6 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b6e45">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Cam Check">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icon-192.png">
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
@@ -31,6 +38,8 @@
   --go-soft: #ddf2e7;
   --lamp-off: #2a3330;
   --housing: #1a2220;
+  --alert-bg: #c3262d;
+  --alert-fg: #ffffff;
   --f-display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
   --f-body: "Barlow", "Segoe UI", system-ui, -apple-system, sans-serif;
   --f-data: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
@@ -116,6 +125,24 @@ details.district .sites { margin-top: 10px; }
 .notes p { margin: 0; max-width: 65ch; }
 .notes a { color: var(--accent); }
 
+/* alert options */
+.toggles { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: .92rem; }
+.toggles label { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+.toggles input { width: 18px; height: 18px; accent-color: var(--accent); }
+
+/* full-screen driving alert */
+.takeover .t-arrow svg { width: 100%; height: 100%; }
+.notify-note { font-size: .85rem; color: var(--caution); margin: 0; }
+.takeover { position: fixed; inset: 0; z-index: 50; background: var(--alert-bg); color: var(--alert-fg); display: grid; place-content: center; text-align: center; gap: 10px;
+  padding-top: calc(24px + env(safe-area-inset-top, 0px)); padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px)); cursor: pointer; }
+.takeover .t-eyebrow { font-family: var(--f-display); font-size: 1.4rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; }
+.takeover .t-dist { font-family: var(--f-display); font-size: clamp(5rem, 28vw, 10rem); font-weight: 700; line-height: .9; font-variant-numeric: tabular-nums; }
+.takeover .t-where { font-size: clamp(1.3rem, 6vw, 2rem); font-weight: 600; line-height: 1.2; text-wrap: balance; }
+.takeover .t-hint { font-size: .95rem; opacity: .85; }
+.takeover .t-arrow { width: 72px; height: 72px; margin: 0 auto; }
+.takeover .t-arrow path { fill: var(--alert-fg); }
+
 @media (max-width: 420px) {
   .status { grid-template-columns: 1fr; }
   .signal { grid-auto-flow: column; justify-content: start; width: max-content; }
@@ -145,11 +172,17 @@ details.district .sites { margin-top: 10px; }
         <div><span class="k">Camera watches</span><span class="v" id="rCam">–</span></div>
       </div>
       <ul class="nearby" id="nearby" hidden></ul>
+      <div class="toggles" role="group" aria-label="Alert options">
+        <label><input type="checkbox" id="optVoice" checked> Spoken warning</label>
+        <label><input type="checkbox" id="optPopup" checked> Full-screen pop-up</label>
+        <label><input type="checkbox" id="optNotify" checked> Phone notification</label>
+      </div>
+      <p class="notify-note" id="notifyNote" hidden></p>
       <div class="actions">
         <button class="primary" id="startBtn" type="button">Start live check</button>
         <button id="stopBtn" type="button" hidden>Stop</button>
       </div>
-      <p class="drive-note">Pins sit at each intersection's centre and are approximate to about a block, so treat the distance as a guide. Set it up while parked.</p>
+      <p class="drive-note">Keep this page open on a mounted phone: browsers stop sharing location once the screen locks or you switch apps. Pins are approximate to about a block. Set it up while parked.</p>
     </div>
   </section>
 
@@ -171,6 +204,14 @@ details.district .sites { margin-top: 10px; }
     <p><strong>Mobile photo radar</strong> isn't fixed and its daily spots aren't published. Ten units work school, playground and construction zones, 7 am to 11 pm, seven days a week. Watch for those zone signs.</p>
     <p>Site list from the <a href="https://www.winnipeg.ca/media/2646" target="_blank" rel="noopener">WPS Photo Enforcement Program 2024 Annual Report</a>. More at <a href="https://www.winnipeg.ca/police/services/traffic/photo-enforcement" target="_blank" rel="noopener">winnipeg.ca photo enforcement</a>.</p>
   </section>
+</div>
+
+<div class="takeover" id="takeover" hidden role="alert" aria-live="assertive">
+  <div class="t-eyebrow">Camera ahead</div>
+  <div class="t-arrow" id="tArrow"></div>
+  <div class="t-dist" id="tDist">300 m</div>
+  <div class="t-where" id="tWhere">Portage Ave at Cavalier Dr</div>
+  <div class="t-hint">Red light and speed enforced · tap to hide</div>
 </div>
 
 <script>
@@ -312,6 +353,57 @@ const compass = h=>["N","NE","E","SE","S","SW","W","NW"][Math.round(h/45)%8];
 const fmtDist = m=> m<1000 ? `${Math.round(m/10)*10} m` : `${(m/1000).toFixed(1)} km`;
 
 let watchId=null, last=null, heading=null, prevDist={}, wakeLock=null, audio=null, alertedId=null;
+let swReg=null, dismissedId=null, nearSpokenId=null;
+const opt = id => { try{ return $(id).checked; }catch(e){ return false; } };
+
+// a service worker lets Android and iPhone home-screen apps show system notifications
+try{
+  if ("serviceWorker" in navigator && location.protocol === "https:" && !/claude\.ai|claudeusercontent/.test(location.host))
+    navigator.serviceWorker.register("sw.js").then(r=>{ swReg=r; }).catch(()=>{});
+}catch(e){}
+
+function notifyNote(){
+  const el = $("notifyNote");
+  let msg = "";
+  const ios = /iPhone|iPad|iPod/.test(navigator.userAgent);
+  const standalone = window.navigator.standalone === true || (window.matchMedia && matchMedia("(display-mode: standalone)").matches);
+  if (opt("optNotify")){
+    if (!("Notification" in window)) msg = ios && !standalone
+      ? "On iPhone, notifications only work after you add this page to your Home Screen (Share → Add to Home Screen) and open it from there."
+      : "This browser can't show notifications. The pop-up and spoken warning still work.";
+    else if (Notification.permission === "denied") msg = "Notifications are blocked for this site. Turn them on in your browser's site settings, or rely on the pop-up and voice.";
+  }
+  el.textContent = msg; el.hidden = !msg;
+}
+async function askNotify(){
+  try{ if (opt("optNotify") && "Notification" in window && Notification.permission === "default") await Notification.requestPermission(); }catch(e){}
+  notifyNote();
+}
+$("optNotify").addEventListener("change", askNotify);
+
+function speak(text){
+  if (!opt("optVoice")) return;
+  try{ const s = window.speechSynthesis; if (!s) return; s.cancel(); const u = new SpeechSynthesisUtterance(text); u.lang = "en-CA"; s.speak(u); }catch(e){}
+}
+const sayDist = m => m < 1000 ? `${Math.round(m/50)*50} metres` : `${(m/1000).toFixed(1)} kilometres`;
+async function notify(title, body){
+  if (!opt("optNotify")) return;
+  try{
+    if (!("Notification" in window) || Notification.permission !== "granted") return;
+    const o = {body, tag:"camera-alert", renotify:true, vibrate:[200,100,200]};
+    if (swReg && swReg.showNotification) { await swReg.showNotification(title, o); return; }
+    new Notification(title, o);
+  }catch(e){}
+}
+function showTakeover(c, d){
+  if (!opt("optPopup") || dismissedId === c.id){ $("takeover").hidden = true; return; }
+  $("tArrow").innerHTML = arrowSvg(c.dir);
+  $("tDist").textContent = fmtDist(d);
+  $("tWhere").textContent = `${c.road} ${c.dir} at ${c.cross}`;
+  $("takeover").hidden = false;
+}
+const hideTakeover = () => { $("takeover").hidden = true; };
+$("takeover").addEventListener("click", ()=>{ dismissedId = alertedId; hideTakeover(); });
 
 function setStatus(tone, lamp, head, sub){
   $("status").dataset.tone = tone;
@@ -353,7 +445,7 @@ function onFix(pos){
 
   const inRange = ranked.filter(r=>r.d<=ALERT_M);
   if (!inRange.length){
-    alertedId=null;
+    alertedId=null; nearSpokenId=null; hideTakeover();
     setStatus("go","go","No camera within 450 m", `Nearest: ${near.c.road} ${near.c.dir} at ${near.c.cross}, about ${fmtDist(near.d)} away.${accuracy>100?" GPS is rough right now.":""}`);
   } else {
     // a camera counts as "yours" when you're heading the way it watches and getting closer
@@ -363,18 +455,33 @@ function onFix(pos){
     });
     if (mine){
       setStatus("stop","stop",`Camera ahead · ${fmtDist(mine.d)}`, `${DIR_WORD[mine.c.dir]} on ${mine.c.road} at ${mine.c.cross} is photo enforced: red light and speed. Ease off and don't push the amber.`);
-      if (alertedId!==mine.c.id){ alertedId=mine.c.id; chime(); }
+      const c = mine.c;
+      if (alertedId!==c.id){
+        alertedId=c.id; dismissedId=null;
+        chime();
+        speak(`Red light camera ahead in ${sayDist(mine.d)}. ${c.road}, at ${c.cross}.`);
+        notify(`Camera ahead · ${fmtDist(mine.d)}`, `${DIR_WORD[c.dir]} ${c.road} at ${c.cross}. Red light and speed enforced.`);
+      } else if (mine.d < 160 && nearSpokenId!==c.id){
+        nearSpokenId=c.id;
+        speak("Camera at this light.");
+      }
+      showTakeover(c, mine.d);
     } else {
       const c = inRange[0].c;
-      alertedId=null;
+      alertedId=null; hideTakeover();
       setStatus("caution","caution",`Camera site ${fmtDist(inRange[0].d)} away`, `${c.road} at ${c.cross} has a camera on ${DIR_WORD[c.dir].toLowerCase()} traffic${heading==null?". Start moving so I can tell which way you're going.":". It doesn't look like your approach, but watch the signal."}`);
     }
   }
   ranked.forEach(({c,d})=>{ if(d<2000) prevDist[c.id]=d; });
 }
 function onErr(err){
-  stopLive(false);
   const blocked = err && err.code===1;
+  if (!blocked && watchId != null){
+    // brief signal loss (overpass, tunnel, slow fix): keep watching
+    setStatus("idle","none","GPS signal weak","Still watching. Alerts resume as soon as your phone gets a fix.");
+    return;
+  }
+  stopLive(false);
   setStatus("idle","none", blocked ? "Location isn't available here" : "Couldn't get your location",
     blocked ? "This view doesn't share GPS with the page. Use “Check a road” below, or open the page in your phone's browser for live alerts."
             : "Your phone didn't return a position. Check that location is on, then try again. “Check a road” works without it.");
@@ -382,6 +489,9 @@ function onErr(err){
 async function startLive(){
   if (!("geolocation" in navigator)){ onErr({code:1}); return; }
   try{ audio = audio || new (window.AudioContext||window.webkitAudioContext)(); }catch(e){}
+  // speak once inside the tap so phones allow later spoken warnings
+  try{ if (window.speechSynthesis){ const u = new SpeechSynthesisUtterance("Camera check is on."); u.volume = opt("optVoice") ? 1 : 0; speechSynthesis.speak(u); } }catch(e){}
+  await askNotify();
   try{ if ("wakeLock" in navigator) wakeLock = await navigator.wakeLock.request("screen"); }catch(e){}
   setStatus("idle","none","Finding you…","Waiting for the first GPS fix.");
   $("startBtn").hidden = true; $("stopBtn").hidden = false;
@@ -391,7 +501,9 @@ async function startLive(){
 }
 function stopLive(reset=true){
   if (watchId!=null){ try{ navigator.geolocation.clearWatch(watchId); }catch(e){} }
-  watchId=null; last=null; heading=null; prevDist={}; alertedId=null;
+  watchId=null; last=null; heading=null; prevDist={}; alertedId=null; dismissedId=null; nearSpokenId=null;
+  hideTakeover();
+  try{ window.speechSynthesis && speechSynthesis.cancel(); }catch(e){}
   try{ wakeLock && wakeLock.release(); }catch(e){} wakeLock=null;
   $("startBtn").hidden = false; $("stopBtn").hidden = true;
   if (reset){
@@ -401,6 +513,12 @@ function stopLive(reset=true){
 }
 $("startBtn").addEventListener("click", startLive);
 $("stopBtn").addEventListener("click", ()=>stopLive(true));
+// phones drop the screen lock when the page is hidden; take it back on return
+document.addEventListener("visibilitychange", async ()=>{
+  if (document.visibilityState === "visible" && watchId != null){
+    try{ if ("wakeLock" in navigator) wakeLock = await navigator.wakeLock.request("screen"); }catch(e){}
+  }
+});
 </script>
 
 </body>
