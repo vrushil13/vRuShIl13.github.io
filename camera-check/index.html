@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b6e45">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Winnipeg Camera Check</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one phone-width column — a signal-head status panel on top, road search, then the full site list by police district. */
+:root {
+  --bg: #eef2f0;
+  --surface: #ffffff;
+  --sunk: #e3e9e6;
+  --fg: #15211c;
+  --muted: #56665f;
+  --line: #d2dbd7;
+  --accent: #0b6e45;
+  --accent-ink: #ffffff;
+  --stop: #c3262d;
+  --stop-soft: #fbe4e4;
+  --caution: #b46f00;
+  --caution-soft: #fdf0d9;
+  --go: #13804f;
+  --go-soft: #ddf2e7;
+  --lamp-off: #2a3330;
+  --housing: #1a2220;
+  --f-display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --f-body: "Barlow", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --f-data: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0c1210; --surface: #141c19; --sunk: #1b2521; --fg: #e5eeea; --muted: #94a59d; --line: #27342f;
+    --accent: #3cc488; --accent-ink: #06130d; --stop: #ff5a5f; --stop-soft: #3a1618; --caution: #f0a92e; --caution-soft: #362811;
+    --go: #3cc488; --go-soft: #12301f; --lamp-off: #222b28; --housing: #070b0a; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0c1210; --surface: #141c19; --sunk: #1b2521; --fg: #e5eeea; --muted: #94a59d; --line: #27342f;
+  --accent: #3cc488; --accent-ink: #06130d; --stop: #ff5a5f; --stop-soft: #3a1618; --caution: #f0a92e; --caution-soft: #362811;
+  --go: #3cc488; --go-soft: #12301f; --lamp-off: #222b28; --housing: #070b0a; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--f-body); font-size: 16px; line-height: 1.5; }
+.wrap { max-width: 680px; margin: 0 auto; padding-block: 20px 40px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 22px; }
+h1, h2 { font-family: var(--f-display); font-weight: 700; text-wrap: balance; margin: 0; letter-spacing: .01em; }
+h1 { font-size: 2.1rem; line-height: 1.05; }
+h2 { font-size: 1.35rem; }
+.eyebrow { font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+.lede { margin: 6px 0 0; color: var(--muted); max-width: 60ch; }
+.num { font-family: var(--f-data); font-variant-numeric: tabular-nums; }
+
+/* status panel */
+.status { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px; display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: start; }
+.signal { background: var(--housing); border-radius: 12px; padding: 8px; display: grid; gap: 7px; }
+.lamp { width: 30px; height: 30px; border-radius: 50%; background: var(--lamp-off); transition: background .25s, box-shadow .25s; }
+.signal[data-state="stop"] .l-red { background: var(--stop); box-shadow: 0 0 16px var(--stop); }
+.signal[data-state="caution"] .l-amber { background: var(--caution); box-shadow: 0 0 16px var(--caution); }
+.signal[data-state="go"] .l-green { background: var(--go); box-shadow: 0 0 16px var(--go); }
+.status-body { min-width: 0; display: grid; gap: 10px; }
+.status-head { font-family: var(--f-display); font-size: 1.6rem; font-weight: 700; line-height: 1.1; }
+.status-sub { color: var(--muted); margin: 0; }
+.readout { display: flex; flex-wrap: wrap; gap: 8px 18px; }
+.readout div { display: grid; }
+.readout .k { font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+.readout .v { font-family: var(--f-data); font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+.status[data-tone="stop"] { background: var(--stop-soft); border-color: var(--stop); }
+.status[data-tone="caution"] { background: var(--caution-soft); border-color: var(--caution); }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; }
+button { font: inherit; font-weight: 600; border-radius: 10px; padding: 10px 16px; border: 1px solid var(--line); background: var(--sunk); color: var(--fg); cursor: pointer; }
+button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+button:focus-visible, input:focus-visible, summary:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.nearby { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; font-size: .92rem; }
+.nearby li { display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid var(--line); padding-top: 4px; }
+.nearby li span:first-child { min-width: 0; }
+.drive-note { font-size: .85rem; color: var(--muted); margin: 0; }
+
+/* search */
+.search { display: grid; gap: 10px; }
+.search label { font-weight: 600; }
+.search input { font: inherit; font-size: 1.05rem; width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); }
+.verdict { font-family: var(--f-display); font-size: 1.3rem; font-weight: 700; margin: 0; }
+.verdict.yes { color: var(--stop); }
+.verdict.no { color: var(--go); }
+
+/* site rows */
+.sites { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.site { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; display: grid; grid-template-columns: 44px 1fr auto; gap: 12px; align-items: center; }
+.dir { width: 44px; height: 44px; border-radius: 8px; background: var(--sunk); display: grid; place-items: center; font-family: var(--f-display); font-weight: 700; font-size: .95rem; line-height: 1; text-align: center; }
+.dir svg { width: 18px; height: 18px; display: block; margin: 0 auto 2px; }
+.dir path { fill: var(--fg); }
+.site-main { min-width: 0; }
+.site-name { font-weight: 600; }
+.site-meta { font-size: .85rem; color: var(--muted); }
+.site a { font-size: .85rem; color: var(--accent); font-weight: 600; text-decoration: none; white-space: nowrap; }
+.site a:hover { text-decoration: underline; }
+.pill { display: inline-block; font-size: .72rem; font-weight: 600; letter-spacing: .04em; padding: 1px 7px; border-radius: 99px; margin-left: 4px; vertical-align: 1px; }
+.pill.active { background: var(--stop-soft); color: var(--stop); }
+.pill.quiet { background: var(--sunk); color: var(--muted); }
+
+details.district { border-top: 1px solid var(--line); padding-top: 10px; }
+details.district summary { cursor: pointer; font-family: var(--f-display); font-size: 1.15rem; font-weight: 700; list-style: none; display: flex; justify-content: space-between; gap: 10px; }
+details.district summary::-webkit-details-marker { display: none; }
+details.district summary::after { content: "+"; color: var(--muted); }
+details.district[open] summary::after { content: "–"; }
+details.district .sites { margin-top: 10px; }
+
+.notes { font-size: .9rem; color: var(--muted); display: grid; gap: 8px; }
+.notes p { margin: 0; max-width: 65ch; }
+.notes a { color: var(--accent); }
+
+@media (max-width: 420px) {
+  .status { grid-template-columns: 1fr; }
+  .signal { grid-auto-flow: column; justify-content: start; width: max-content; }
+  .site { grid-template-columns: 40px 1fr; }
+  .site a { grid-column: 2; }
+}
+@media (prefers-reduced-motion: reduce) { .lamp { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Winnipeg Police Service · intersection safety cameras</div>
+    <h1>Winnipeg Camera Check</h1>
+    <p class="lede">Is the light ahead photo enforced? Every one of the city's 49 red light and speed-on-green camera sites, with the approach each camera watches.</p>
+  </header>
+
+  <section class="status" id="status" data-tone="idle" aria-live="polite">
+    <div class="signal" id="signal" data-state="none" aria-hidden="true">
+      <div class="lamp l-red"></div><div class="lamp l-amber"></div><div class="lamp l-green"></div>
+    </div>
+    <div class="status-body">
+      <div class="status-head" id="statusHead">Live check is off</div>
+      <p class="status-sub" id="statusSub">Start it before you drive. It follows your location and warns you within 450 m of a camera on the road you're heading into.</p>
+      <div class="readout" id="readout" hidden>
+        <div><span class="k">Nearest site</span><span class="v" id="rDist">–</span></div>
+        <div><span class="k">Your heading</span><span class="v" id="rHead">–</span></div>
+        <div><span class="k">Camera watches</span><span class="v" id="rCam">–</span></div>
+      </div>
+      <ul class="nearby" id="nearby" hidden></ul>
+      <div class="actions">
+        <button class="primary" id="startBtn" type="button">Start live check</button>
+        <button id="stopBtn" type="button" hidden>Stop</button>
+      </div>
+      <p class="drive-note">Pins sit at each intersection's centre and are approximate to about a block, so treat the distance as a guide. Set it up while parked.</p>
+    </div>
+  </section>
+
+  <section class="search">
+    <h2>Check a road</h2>
+    <label for="roadQuery">Street or intersection name</label>
+    <input id="roadQuery" type="search" placeholder="e.g. Portage, Pembina, Main" autocomplete="off" enterkeyhint="search">
+    <p class="verdict" id="verdict" hidden></p>
+    <ul class="sites" id="results"></ul>
+  </section>
+
+  <section>
+    <h2>All 49 sites by police district</h2>
+    <div id="districts" style="display:grid;gap:10px;margin-top:10px"></div>
+  </section>
+
+  <section class="notes">
+    <p><strong>Red pill</strong> = the camera issued tickets in 2024. <strong>Grey</strong> = no tickets that year; police rotate cameras among these signed sites, so a quiet site can switch back on at any time.</p>
+    <p><strong>Mobile photo radar</strong> isn't fixed and its daily spots aren't published. Ten units work school, playground and construction zones, 7 am to 11 pm, seven days a week. Watch for those zone signs.</p>
+    <p>Site list from the <a href="https://www.winnipeg.ca/media/2646" target="_blank" rel="noopener">WPS Photo Enforcement Program 2024 Annual Report</a>. More at <a href="https://www.winnipeg.ca/police/services/traffic/photo-enforcement" target="_blank" rel="noopener">winnipeg.ca photo enforcement</a>.</p>
+  </section>
+</div>
+
+<script>
+// [district, road, approach, cross street, lat, lon, tickets 2024]
+const RAW = [
+  [1,"Balmoral St","NB","Sargent Ave",49.9000,-97.1497,788],
+  [1,"Disraeli Fwy","NB","Lily St",49.9046,-97.1325,972],
+  [1,"Donald St","SB","Broadway",49.8890,-97.1442,696],
+  [1,"Isabel St","NB","William Ave",49.9035,-97.1490,969],
+  [1,"Main St","NB","Logan Ave",49.9024,-97.1377,2436],
+  [1,"Notre Dame Ave","WB","Sherbrook St",49.9030,-97.1540,0],
+  [1,"York Ave","EB","Fort St",49.8915,-97.1402,1033],
+  [2,"Academy Rd","EB","Stafford St",49.8728,-97.1612,0],
+  [2,"Academy Rd","WB","Oak St",49.8710,-97.1906,875],
+  [2,"Century St","NB","Silver Ave",49.9015,-97.2245,431],
+  [2,"Erin St","SB","Sargent Ave",49.9018,-97.1850,0],
+  [2,"Grant Ave","EB","William R. Clement Pkwy",49.8540,-97.2530,480],
+  [2,"Grant Ave","WB","Wilton St",49.8620,-97.1600,2022],
+  [2,"Jubilee Ave","WB","Cockburn St S",49.8550,-97.1390,0],
+  [2,"Kenaston Blvd","SB","Corydon Ave",49.8580,-97.2070,2160],
+  [2,"Moray St","NB","Lodge Ave",49.8852,-97.2810,714],
+  [2,"Ness Ave","WB","Whytewold Rd",49.8925,-97.2865,0],
+  [2,"Pembina Hwy","NB","Dalhousie Dr / Bairdmore Blvd",49.8100,-97.1465,1440],
+  [2,"Pembina Hwy","NB","Grant Ave",49.8607,-97.1460,1451],
+  [2,"Pembina Hwy","SB","Chevrier Blvd",49.8340,-97.1520,1498],
+  [2,"Portage Ave","EB","Cavalier Dr",49.8818,-97.2740,56],
+  [2,"Portage Ave","EB","Dominion St",49.8865,-97.1840,509],
+  [2,"Portage Ave","WB","Mount Royal Rd",49.8835,-97.2560,0],
+  [2,"Sargent Ave","EB","Clifton St",49.9017,-97.1745,337],
+  [2,"St. James St","SB","Ness Ave",49.8920,-97.2008,159],
+  [3,"Inkster Blvd","WB","Airlies St",49.9400,-97.1770,0],
+  [3,"Keewatin St","NB","Selkirk Ave",49.9140,-97.1815,781],
+  [3,"Leila Ave","WB","Sinclair St",49.9560,-97.1525,0],
+  [3,"Main St","NB","Inkster Blvd",49.9350,-97.1265,608],
+  [3,"Main St","SB","Redwood Ave",49.9165,-97.1340,375],
+  [3,"McPhillips St","SB","Jefferson Ave",49.9455,-97.1610,479],
+  [3,"McPhillips St","SB","Redwood Ave",49.9190,-97.1530,576],
+  [3,"Salter St","SB","Mountain Ave",49.9245,-97.1462,0],
+  [4,"Archibald St","SB","Elizabeth Rd",49.8655,-97.1015,0],
+  [4,"Abinojii Mikanah","WB","River Rd",49.8312,-97.1210,377],
+  [4,"Dunkirk Dr","NB","St. Vital Rd",49.8455,-97.1180,498],
+  [4,"Fermor Ave","WB","St. Mary's Rd",49.8582,-97.1167,57],
+  [4,"Henderson Hwy","NB","Gilmore Ave",49.9258,-97.1098,320],
+  [4,"Henderson Hwy","SB","Kimberly Ave",49.9320,-97.1078,0],
+  [4,"Hespeler Ave","EB","Beatrice St",49.9150,-97.1165,1293],
+  [4,"Lagimodiere Blvd","SB","Grassie Blvd",49.9260,-97.0560,471],
+  [4,"Marion St","EB","Dufresne Ave",49.8858,-97.1135,4739],
+  [4,"Panet Rd","SB","Munroe Ave",49.9100,-97.0905,918],
+  [4,"Provencher Blvd","EB","Aulneau St",49.8960,-97.1205,0],
+  [4,"Regent Ave W","WB","Owen St",49.9005,-97.0810,2240],
+  [4,"Regent Ave W","EB","Madeline St",49.8990,-97.0675,961],
+  [4,"St. Mary's Rd","NB","Warde Ave",49.8195,-97.1070,619],
+  [4,"St. Anne's Rd","NB","Meadowood Dr",49.8245,-97.0925,548],
+  [4,"Talbot Ave","EB","Watt St",49.9112,-97.1095,0]
+];
+const DISTRICT_NAMES = {1:"District 1 · Downtown", 2:"District 2 · West", 3:"District 3 · North", 4:"District 4 · East"};
+const DIR_DEG = {NB:0, EB:90, SB:180, WB:270};
+const DIR_WORD = {NB:"Northbound", EB:"Eastbound", SB:"Southbound", WB:"Westbound"};
+const cams = RAW.map((r,i)=>({id:i, district:r[0], road:r[1], dir:r[2], cross:r[3], lat:r[4], lon:r[5], t:r[6]}));
+
+const $ = id => document.getElementById(id);
+const norm = s => s.toLowerCase().replace(/[.'’]/g,"").replace(/\bst\b/g,"st").replace(/\s+/g," ").trim();
+
+function arrowSvg(dir){
+  const rot = DIR_DEG[dir];
+  return `<svg viewBox="0 0 18 18" aria-hidden="true"><path transform="rotate(${rot} 9 9)" d="M9 1 L16 10 H11 V17 H7 V10 H2 Z"/></svg>`;
+}
+function mapUrl(c){
+  const q = `${c.road} & ${c.cross.split(" / ")[0]}, Winnipeg, MB`;
+  return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
+}
+function siteRow(c, extra){
+  const li = document.createElement("li");
+  li.className = "site";
+  const pill = c.t > 0
+    ? `<span class="pill active">${c.t.toLocaleString()} tickets 2024</span>`
+    : `<span class="pill quiet">no tickets 2024</span>`;
+  li.innerHTML = `<div class="dir" title="${DIR_WORD[c.dir]}">${arrowSvg(c.dir)}${c.dir}</div>
+    <div class="site-main"><div class="site-name">${c.road} at ${c.cross}</div>
+    <div class="site-meta">${DIR_WORD[c.dir]} traffic on ${c.road}${extra?" · "+extra:""} ${pill}</div></div>
+    <a href="${mapUrl(c)}" target="_blank" rel="noopener">Map ↗</a>`;
+  return li;
+}
+
+/* ---- all sites by district ---- */
+(function renderDistricts(){
+  const box = $("districts");
+  [1,2,3,4].forEach(d=>{
+    const list = cams.filter(c=>c.district===d).sort((a,b)=>a.road.localeCompare(b.road));
+    const det = document.createElement("details");
+    det.className = "district";
+    det.id = "district-"+d;
+    const sum = document.createElement("summary");
+    sum.innerHTML = `<span>${DISTRICT_NAMES[d]}</span><span class="num" style="font-size:.9rem;color:var(--muted);margin-left:auto">${list.length} sites</span>`;
+    det.appendChild(sum);
+    const ul = document.createElement("ul"); ul.className="sites";
+    list.forEach(c=>ul.appendChild(siteRow(c)));
+    det.appendChild(ul);
+    box.appendChild(det);
+  });
+})();
+
+/* ---- road search ---- */
+function runSearch(){
+  const q = norm($("roadQuery").value);
+  const out = $("results"), v = $("verdict");
+  out.textContent = "";
+  if (q.length < 2){ v.hidden = true; return; }
+  const words = q.split(" ").filter(w=>w.length>1 && !["st","ave","rd","blvd","dr","hwy","and","at"].includes(w));
+  const keys = words.length ? words : [q];
+  const onRoad = [], crossing = [];
+  cams.forEach(c=>{
+    const r = norm(c.road), x = norm(c.cross);
+    const hitR = keys.every(k=>r.includes(k) || x.includes(k)) && keys.some(k=>r.includes(k));
+    const hitX = !hitR && keys.every(k=>x.includes(k) || r.includes(k));
+    if (hitR) onRoad.push(c); else if (hitX) crossing.push(c);
+  });
+  v.hidden = false;
+  if (!onRoad.length && !crossing.length){
+    v.className = "verdict no";
+    v.textContent = `No camera sites on “${$("roadQuery").value.trim()}”.`;
+    return;
+  }
+  const n = onRoad.length + crossing.length;
+  v.className = "verdict yes";
+  v.textContent = n === 1 ? "1 camera site matches" : `${n} camera sites match`;
+  onRoad.forEach(c=>out.appendChild(siteRow(c)));
+  crossing.forEach(c=>out.appendChild(siteRow(c, `you'd be crossing it on ${c.cross}`)));
+}
+$("roadQuery").addEventListener("input", runSearch);
+
+/* ---- live check ---- */
+const R = 6371000, ALERT_M = 450;
+const toRad = d=>d*Math.PI/180;
+function dist(a,b,c,d){ const dLat=toRad(c-a), dLon=toRad(d-b); const h=Math.sin(dLat/2)**2+Math.cos(toRad(a))*Math.cos(toRad(c))*Math.sin(dLon/2)**2; return 2*R*Math.asin(Math.sqrt(h)); }
+function bearing(a,b,c,d){ const y=Math.sin(toRad(d-b))*Math.cos(toRad(c)); const x=Math.cos(toRad(a))*Math.sin(toRad(c))-Math.sin(toRad(a))*Math.cos(toRad(c))*Math.cos(toRad(d-b)); return (Math.atan2(y,x)*180/Math.PI+360)%360; }
+const angDiff = (a,b)=>{ const d=Math.abs(a-b)%360; return d>180?360-d:d; };
+const compass = h=>["N","NE","E","SE","S","SW","W","NW"][Math.round(h/45)%8];
+const fmtDist = m=> m<1000 ? `${Math.round(m/10)*10} m` : `${(m/1000).toFixed(1)} km`;
+
+let watchId=null, last=null, heading=null, prevDist={}, wakeLock=null, audio=null, alertedId=null;
+
+function setStatus(tone, lamp, head, sub){
+  $("status").dataset.tone = tone;
+  $("signal").dataset.state = lamp;
+  $("statusHead").textContent = head;
+  $("statusSub").textContent = sub;
+}
+function chime(){
+  try{
+    if(!audio) return;
+    const o=audio.createOscillator(), g=audio.createGain();
+    o.frequency.value=880; o.connect(g); g.connect(audio.destination);
+    g.gain.setValueAtTime(.0001,audio.currentTime); g.gain.exponentialRampToValueAtTime(.3,audio.currentTime+.02); g.gain.exponentialRampToValueAtTime(.0001,audio.currentTime+.5);
+    o.start(); o.stop(audio.currentTime+.55);
+  }catch(e){}
+  try{ navigator.vibrate && navigator.vibrate([200,100,200]); }catch(e){}
+}
+
+function onFix(pos){
+  const {latitude:lat, longitude:lon, heading:h, speed, accuracy} = pos.coords;
+  if (h!=null && !isNaN(h) && speed!=null && speed>1.5) heading = h;
+  else if (last && dist(last.lat,last.lon,lat,lon) > 15) heading = bearing(last.lat,last.lon,lat,lon);
+  if (!last || dist(last.lat,last.lon,lat,lon) > 15) last = {lat,lon};
+
+  const ranked = cams.map(c=>({c, d:dist(lat,lon,c.lat,c.lon)})).sort((a,b)=>a.d-b.d);
+  const near = ranked[0];
+  $("readout").hidden = false;
+  $("rDist").textContent = fmtDist(near.d);
+  $("rHead").textContent = heading==null ? "moving?" : `${compass(heading)} ${Math.round(heading)}°`;
+  $("rCam").textContent = `${near.c.dir} on ${near.c.road}`;
+
+  const nb = $("nearby"); nb.hidden=false; nb.textContent="";
+  ranked.slice(0,3).forEach(({c,d})=>{
+    const li=document.createElement("li");
+    const a=document.createElement("span"); a.textContent=`${c.road} ${c.dir} at ${c.cross}`;
+    const b=document.createElement("span"); b.className="num"; b.textContent=fmtDist(d);
+    li.append(a,b); nb.appendChild(li);
+  });
+
+  const inRange = ranked.filter(r=>r.d<=ALERT_M);
+  if (!inRange.length){
+    alertedId=null;
+    setStatus("go","go","No camera within 450 m", `Nearest: ${near.c.road} ${near.c.dir} at ${near.c.cross}, about ${fmtDist(near.d)} away.${accuracy>100?" GPS is rough right now.":""}`);
+  } else {
+    // a camera counts as "yours" when you're heading the way it watches and getting closer
+    const mine = inRange.find(({c,d})=>{
+      const closing = prevDist[c.id]!=null ? d < prevDist[c.id]-3 : true;
+      return heading!=null && angDiff(heading, DIR_DEG[c.dir]) <= 55 && closing;
+    });
+    if (mine){
+      setStatus("stop","stop",`Camera ahead · ${fmtDist(mine.d)}`, `${DIR_WORD[mine.c.dir]} on ${mine.c.road} at ${mine.c.cross} is photo enforced: red light and speed. Ease off and don't push the amber.`);
+      if (alertedId!==mine.c.id){ alertedId=mine.c.id; chime(); }
+    } else {
+      const c = inRange[0].c;
+      alertedId=null;
+      setStatus("caution","caution",`Camera site ${fmtDist(inRange[0].d)} away`, `${c.road} at ${c.cross} has a camera on ${DIR_WORD[c.dir].toLowerCase()} traffic${heading==null?". Start moving so I can tell which way you're going.":". It doesn't look like your approach, but watch the signal."}`);
+    }
+  }
+  ranked.forEach(({c,d})=>{ if(d<2000) prevDist[c.id]=d; });
+}
+function onErr(err){
+  stopLive(false);
+  const blocked = err && err.code===1;
+  setStatus("idle","none", blocked ? "Location isn't available here" : "Couldn't get your location",
+    blocked ? "This view doesn't share GPS with the page. Use “Check a road” below, or open the page in your phone's browser for live alerts."
+            : "Your phone didn't return a position. Check that location is on, then try again. “Check a road” works without it.");
+}
+async function startLive(){
+  if (!("geolocation" in navigator)){ onErr({code:1}); return; }
+  try{ audio = audio || new (window.AudioContext||window.webkitAudioContext)(); }catch(e){}
+  try{ if ("wakeLock" in navigator) wakeLock = await navigator.wakeLock.request("screen"); }catch(e){}
+  setStatus("idle","none","Finding you…","Waiting for the first GPS fix.");
+  $("startBtn").hidden = true; $("stopBtn").hidden = false;
+  try{
+    watchId = navigator.geolocation.watchPosition(onFix, onErr, {enableHighAccuracy:true, maximumAge:2000, timeout:20000});
+  }catch(e){ onErr({code:1}); }
+}
+function stopLive(reset=true){
+  if (watchId!=null){ try{ navigator.geolocation.clearWatch(watchId); }catch(e){} }
+  watchId=null; last=null; heading=null; prevDist={}; alertedId=null;
+  try{ wakeLock && wakeLock.release(); }catch(e){} wakeLock=null;
+  $("startBtn").hidden = false; $("stopBtn").hidden = true;
+  if (reset){
+    $("readout").hidden = true; $("nearby").hidden = true;
+    setStatus("idle","none","Live check is off","Start it before you drive. It follows your location and warns you within 450 m of a camera on the road you're heading into.");
+  }
+}
+$("startBtn").addEventListener("click", startLive);
+$("stopBtn").addEventListener("click", ()=>stopLive(true));
+</script>
+
+</body>
+</html>
