@@ -233,72 +233,134 @@
     <div class="section-label" aria-hidden="true">Projects</div>
     <h2 class="section-title reveal">Things I've<br><em style="font-style:italic;font-family:'DM Serif Display',serif">built</em></h2>
     <div class="projects-grid">
-      <article class="project-card reveal">
-        <div class="project-num">01 · AI / EdTech</div>
-        <h3 class="project-name">Qstudy AI</h3>
-        <p class="project-desc">Full-stack developer on an AI-powered study platform. Built scrolling short educational videos, AI-generated music, stories, flashcards, and quizzes — TikTok meets a personal tutor.</p>
-        <div class="tech-tags" style="margin-bottom:1rem">
-          <span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">TailwindCSS</span><span class="tag">FastAPI</span><span class="tag">OpenRouter</span><span class="tag">MaterialUI</span>
+
+      <!-- Featured: Jhabho Online -->
+      <article class="project-card project-feature reveal">
+        <div class="project-media" data-gallery>
+          <img class="project-shot" src="assets/projects/jhabho-gameplay.webp" width="1440" height="855" loading="lazy" decoding="async"
+               alt="Jhabho Online: a 3D card mat with four players seated around it and the player's hand of cards at the bottom">
+          <div class="project-thumbs" role="group" aria-label="Jhabho Online screenshots">
+            <button type="button" class="thumb is-active" aria-pressed="true" data-src="assets/projects/jhabho-gameplay.webp" data-alt="Jhabho Online: a hand in progress, with the cards you can legally play raised">
+              <img src="assets/projects/jhabho-gameplay.webp" alt="" loading="lazy"><span class="sr-only">A hand in progress</span>
+            </button>
+            <button type="button" class="thumb" aria-pressed="false" data-src="assets/projects/jhabho-cut.webp" data-alt="Jhabho Online: a player cuts the trick and the highest card of the led suit picks up the pile">
+              <img src="assets/projects/jhabho-cut.webp" alt="" loading="lazy"><span class="sr-only">A cut</span>
+            </button>
+            <button type="button" class="thumb" aria-pressed="false" data-src="assets/projects/jhabho-home.webp" data-alt="Jhabho Online home screen with Play, Leaderboard, Shop, Friends and Settings">
+              <img src="assets/projects/jhabho-home.webp" alt="" loading="lazy"><span class="sr-only">Home screen</span>
+            </button>
+          </div>
         </div>
-        <div class="project-links">
-          <a href="#" class="project-link">→ View App</a>
+        <div class="project-body">
+          <div class="project-num">01 · Multiplayer game · Live</div>
+          <h3 class="project-name">Jhabho Online</h3>
+          <p class="project-desc">An online multiplayer version of Jhabho, the Gujarati card game I grew up playing, with MINDI as a second game. Players sit around a 3D mat in the browser, at invite-code tables or open ones in a public lobby, and computer players can fill any empty seat.</p>
+          <ul class="project-points">
+            <li>Authoritative Node.js game server with a hand-written WebSocket layer and no npm dependencies: it deals, enforces the rules and turn timer, and only ever sends each player their own hand</li>
+            <li>One rules engine and set of bots shared by the server and client, covered by an automated test suite that plays simulated games</li>
+            <li>Email-code sign-in, coins, XP levels and a leaderboard stored in Supabase; friends, a shop of unlockable places and mats, and an Android build with Capacitor</li>
+          </ul>
+          <div class="tech-tags">
+            <span class="tag">JavaScript</span><span class="tag">Node.js</span><span class="tag">WebSockets</span><span class="tag">Three.js</span><span class="tag">Supabase</span><span class="tag">Capacitor</span><span class="tag">Render</span>
+          </div>
+          <div class="project-links">
+            <a href="https://jhabho.onrender.com" class="project-link project-link--primary" target="_blank" rel="noopener noreferrer">Play the game ↗</a>
+          </div>
+          <p class="project-note">Hosted on a free server: if nobody has played for a while, the first load can take up to a minute.</p>
         </div>
       </article>
-      <article class="project-card reveal">
-        <div class="project-num">02 · Data Engineering</div>
-        <h3 class="project-name">BigQuery Migration System</h3>
-        <p class="project-desc">Led Go migration of three production jobs at Priceline — redirecting canceled offer retrieval and refund lookups from Oracle to BigQuery with zero downtime, delivered in two weeks.</p>
-        <div class="tech-tags" style="margin-bottom:1rem">
-          <span class="tag">Go</span><span class="tag">BigQuery</span><span class="tag">Oracle</span><span class="tag">MySQL</span>
+
+      <!-- Winnipeg Camera Check -->
+      <article class="project-card project-card--media reveal">
+        <div class="project-cover project-cover--phone">
+          <img src="assets/projects/camera-check.webp" width="560" height="873" loading="lazy" decoding="async"
+               alt="Winnipeg Camera Check on a phone: the live check panel with spoken warning, pop-up and notification options">
+        </div>
+        <div class="project-num">02 · Web app · Live</div>
+        <h3 class="project-name">Winnipeg Camera Check</h3>
+        <p class="project-desc">A phone-first web app covering all 49 of Winnipeg's red-light and speed-on-green camera sites, grouped by police district, with the approach each camera watches. Turn on live check before driving and it follows your location, warning you within 450 m of a camera on the road ahead with a spoken alert, a full-screen pop-up or a phone notification.</p>
+        <div class="tech-tags">
+          <span class="tag">JavaScript</span><span class="tag">Geolocation API</span><span class="tag">Web Speech API</span><span class="tag">Notifications</span><span class="tag">PWA</span>
         </div>
         <div class="project-links">
-          <a href="#experience" class="project-link">→ Priceline Work</a>
+          <a href="camera-check/" class="project-link project-link--primary" target="_blank" rel="noopener">Open the app ↗</a>
+          <a href="https://github.com/vrushil13/vrushil13.github.io/tree/main/camera-check" class="project-link" target="_blank" rel="noopener noreferrer">Source ↗</a>
         </div>
       </article>
+
+      <!-- GibbsNet -->
+      <article class="project-card project-card--media reveal">
+        <div class="project-cover project-cover--figure">
+          <img src="assets/projects/gibbsnet.webp" width="1190" height="376" loading="lazy" decoding="async"
+               alt="GibbsNet output: the original square, the same image with Gaussian noise, and the denoised result">
+        </div>
+        <div class="project-num">03 · Probabilistic AI</div>
+        <h3 class="project-name">GibbsNet</h3>
+        <p class="project-desc">Image denoising with Gibbs sampling. Each pixel is treated as a random variable whose posterior combines a Gaussian prior from its four neighbours with the observed noisy value through Bayes' rule. Over 50,000 sampling iterations it restores a noisy greyscale image, with the original, noisy and denoised results plotted side by side.</p>
+        <div class="tech-tags">
+          <span class="tag">Python</span><span class="tag">NumPy</span><span class="tag">Matplotlib</span><span class="tag">Bayesian inference</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/vrushil13/GibbsNet" class="project-link" target="_blank" rel="noopener noreferrer">View on GitHub ↗</a>
+        </div>
+      </article>
+
+      <!-- DigitVision -->
+      <article class="project-card project-card--media reveal">
+        <div class="project-cover project-cover--figure">
+          <img src="assets/projects/digitvision.webp" width="952" height="408" loading="lazy" decoding="async"
+               alt="Ten random MNIST training digits with their labels, plotted by DigitVision">
+        </div>
+        <div class="project-num">04 · Computer vision</div>
+        <h3 class="project-name">DigitVision</h3>
+        <p class="project-desc">A convolutional neural network trained on MNIST's 60,000 handwritten digits to measure how much feature extraction matters. The network stays fixed while the input changes: a bad extractor adds Gaussian noise, a good one applies an OpenCV sharpening filter. It plots validation loss per epoch and reports test accuracy for each.</p>
+        <div class="tech-tags">
+          <span class="tag">Python</span><span class="tag">Keras</span><span class="tag">TensorFlow</span><span class="tag">OpenCV</span><span class="tag">scikit-learn</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/vrushil13/DigitVision" class="project-link" target="_blank" rel="noopener noreferrer">View on GitHub ↗</a>
+        </div>
+      </article>
+
+      <!-- Next.js work at Norima -->
       <article class="project-card reveal">
-        <div class="project-num">03 · Full-Stack</div>
+        <div class="project-num">05 · Full-stack</div>
         <h3 class="project-name">Next.js Web Applications</h3>
-        <p class="project-desc">Building modern, production-ready web applications at Norima Consulting using Next.js, TypeScript, and React — spanning UI, API routes, and server-side rendering across a range of client engagements.</p>
-        <div class="tech-tags" style="margin-bottom:1rem">
+        <p class="project-desc">Building modern, production-ready web applications at Norima Consulting using Next.js, TypeScript, and React, spanning UI, API routes, and server-side rendering across a range of client engagements.</p>
+        <div class="tech-tags">
           <span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">TailwindCSS</span>
         </div>
         <div class="project-links">
           <a href="#experience" class="project-link">→ Norima Consulting</a>
         </div>
       </article>
+
+      <!-- Payment tokenization at Priceline -->
       <article class="project-card reveal">
-        <div class="project-num">04 · Backend API</div>
+        <div class="project-num">06 · Backend API</div>
         <h3 class="project-name">Payment Tokenization API</h3>
         <p class="project-desc">Contributed to the tokenization schema design and integrated a secure GraphQL mutation at Priceline to tokenize payment data, persisting tokenized records via Ruby on Rails models.</p>
-        <div class="tech-tags" style="margin-bottom:1rem">
+        <div class="tech-tags">
           <span class="tag">GraphQL</span><span class="tag">Ruby on Rails</span><span class="tag">Security</span>
         </div>
         <div class="project-links">
-          <a href="#experience" class="project-link">→ Priceline Work</a>
+          <a href="#experience" class="project-link">→ Priceline</a>
         </div>
       </article>
+
+      <!-- Lottery logic at Pollard Banknote -->
       <article class="project-card reveal">
-        <div class="project-num">05 · Backend Automation</div>
-        <h3 class="project-name">AI-Driven Backend Workflows</h3>
-        <p class="project-desc">Built Python backend workflows at IG Wealth that leverage AI and real-time Confluent APIs to automate previously manual business processes end-to-end.</p>
-        <div class="tech-tags" style="margin-bottom:1rem">
-          <span class="tag">Python</span><span class="tag">Confluent</span><span class="tag">REST APIs</span><span class="tag">Automation</span>
-        </div>
-        <div class="project-links">
-          <a href="#experience" class="project-link">→ IG Wealth</a>
-        </div>
-      </article>
-      <article class="project-card reveal">
-        <div class="project-num">06 · Systems / Game Dev</div>
+        <div class="project-num">07 · Systems</div>
         <h3 class="project-name">Lottery Game Engine</h3>
         <p class="project-desc">Built C++ ticket restriction logic at Pollard Banknote using QT Creator and OOP principles. Enforced complex customer-defined rules and passed rigorous statistical QA with XreportViewer.</p>
-        <div class="tech-tags" style="margin-bottom:1rem">
+        <div class="tech-tags">
           <span class="tag">C++</span><span class="tag">OOP</span><span class="tag">QT Creator</span><span class="tag">Unix</span>
         </div>
         <div class="project-links">
           <a href="#experience" class="project-link">→ Pollard Banknote</a>
         </div>
       </article>
+
     </div>
   </div>
 </section>
@@ -423,7 +485,7 @@
       <div class="contact-info reveal">
         <h3>Open to opportunities</h3>
         <p>Whether it's an exciting full-time role, an interesting project, or just a conversation about backend engineering and data systems — I'm always happy to connect.</p>
-        <nav class="social-links" aria-label="Social links">
+        <div class="social-links">
           <a href="https://github.com/vrushil13" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
             <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
             github.com/vrushil13
@@ -440,7 +502,7 @@
             <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
             +1 (431) 374-1787
           </a>
-        </nav>
+        </div>
       </div>
       <div class="reveal">
         <form id="contact-form" novalidate aria-label="Contact form">

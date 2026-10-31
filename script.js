@@ -302,3 +302,14 @@ function showStatus(msg, ok) {
   el.className = 'form-status ' + (ok?'success':'error');
   setTimeout(() => { el.className='form-status'; }, 6000);
 }
+
+// PROJECT GALLERY: thumbnails swap the main screenshot
+document.querySelectorAll('[data-gallery]').forEach(gallery => {
+  const main = gallery.querySelector('.project-shot');
+  const thumbs = gallery.querySelectorAll('.thumb');
+  thumbs.forEach(t => t.addEventListener('click', () => {
+    main.src = t.dataset.src;
+    main.alt = t.dataset.alt;
+    thumbs.forEach(x => { const on = x === t; x.classList.toggle('is-active', on); x.setAttribute('aria-pressed', on); });
+  }));
+});
