@@ -232,49 +232,31 @@
   <div class="container">
     <div class="section-label" aria-hidden="true">Projects</div>
     <h2 class="section-title reveal">Things I've<br><em style="font-style:italic;font-family:'DM Serif Display',serif">built</em></h2>
-    <div class="projects-grid">
+    <div class="projects-grid projects-grid--media">
 
-      <!-- Featured: Jhabho Online -->
-      <article class="project-card project-feature reveal">
-        <div class="project-media" data-gallery>
-          <img class="project-shot" src="assets/projects/jhabho-gameplay.webp" width="1440" height="855" loading="lazy" decoding="async"
-               alt="Jhabho Online: a 3D card mat with four players seated around it and the player's hand of cards at the bottom">
-          <div class="project-thumbs" role="group" aria-label="Jhabho Online screenshots">
-            <button type="button" class="thumb is-active" aria-pressed="true" data-src="assets/projects/jhabho-gameplay.webp" data-alt="Jhabho Online: a hand in progress, with the cards you can legally play raised">
-              <img src="assets/projects/jhabho-gameplay.webp" alt="" loading="lazy"><span class="sr-only">A hand in progress</span>
-            </button>
-            <button type="button" class="thumb" aria-pressed="false" data-src="assets/projects/jhabho-cut.webp" data-alt="Jhabho Online: a player cuts the trick and the highest card of the led suit picks up the pile">
-              <img src="assets/projects/jhabho-cut.webp" alt="" loading="lazy"><span class="sr-only">A cut</span>
-            </button>
-            <button type="button" class="thumb" aria-pressed="false" data-src="assets/projects/jhabho-home.webp" data-alt="Jhabho Online home screen with Play, Leaderboard, Shop, Friends and Settings">
-              <img src="assets/projects/jhabho-home.webp" alt="" loading="lazy"><span class="sr-only">Home screen</span>
-            </button>
-          </div>
+      <!-- Jhabho Online -->
+      <article class="project-card project-card--media reveal">
+        <div class="project-cover">
+          <img src="assets/projects/jhabho.webp" width="1200" height="675" loading="lazy" decoding="async"
+               alt="Jhabho: Hand-Me-Down, a Gujarati card game of memory and bluff">
         </div>
-        <div class="project-body">
-          <div class="project-num">01 · Multiplayer game · Live</div>
-          <h3 class="project-name">Jhabho Online</h3>
-          <p class="project-desc">An online multiplayer version of Jhabho, the Gujarati card game I grew up playing, with MINDI as a second game. Players sit around a 3D mat in the browser, at invite-code tables or open ones in a public lobby, and computer players can fill any empty seat.</p>
-          <ul class="project-points">
-            <li>Authoritative Node.js game server with a hand-written WebSocket layer and no npm dependencies: it deals, enforces the rules and turn timer, and only ever sends each player their own hand</li>
-            <li>One rules engine and set of bots shared by the server and client, covered by an automated test suite that plays simulated games</li>
-            <li>Email-code sign-in, coins, XP levels and a leaderboard stored in Supabase; friends, a shop of unlockable places and mats, and an Android build with Capacitor</li>
-          </ul>
-          <div class="tech-tags">
-            <span class="tag">JavaScript</span><span class="tag">Node.js</span><span class="tag">WebSockets</span><span class="tag">Three.js</span><span class="tag">Supabase</span><span class="tag">Capacitor</span><span class="tag">Render</span>
-          </div>
-          <div class="project-links">
-            <a href="https://jhabho.onrender.com" class="project-link project-link--primary" target="_blank" rel="noopener noreferrer">Play the game ↗</a>
-          </div>
-          <p class="project-note">Hosted on a free server: if nobody has played for a while, the first load can take up to a minute.</p>
+        <div class="project-num">01 · Multiplayer game · Live</div>
+        <h3 class="project-name">Jhabho Online</h3>
+        <p class="project-desc">An online multiplayer version of Jhabho, the Gujarati card game I grew up playing, with MINDI as a second game. Players sit around a 3D mat in the browser at invite-code or public tables, with computer players filling empty seats. A dependency-free Node.js game server deals the cards, enforces the rules and turn timer, and only ever sends each player their own hand; Supabase stores accounts, coins and the leaderboard.</p>
+        <div class="tech-tags">
+          <span class="tag">JavaScript</span><span class="tag">Node.js</span><span class="tag">WebSockets</span><span class="tag">Three.js</span><span class="tag">Supabase</span><span class="tag">Capacitor</span>
         </div>
+        <div class="project-links">
+          <a href="https://jhabho.onrender.com" class="project-link project-link--primary" target="_blank" rel="noopener noreferrer">Play the game ↗</a>
+        </div>
+        <p class="project-note">Free server: the first load can take up to a minute to wake up.</p>
       </article>
 
       <!-- Winnipeg Camera Check -->
       <article class="project-card project-card--media reveal">
-        <div class="project-cover project-cover--phone">
-          <img src="assets/projects/camera-check.webp" width="560" height="873" loading="lazy" decoding="async"
-               alt="Winnipeg Camera Check on a phone: the live check panel with spoken warning, pop-up and notification options">
+        <div class="project-cover">
+          <img src="assets/projects/camera-check.webp" width="1200" height="675" loading="lazy" decoding="async"
+               alt="Winnipeg Camera Check: the live check panel with spoken warning, pop-up and phone notification options">
         </div>
         <div class="project-num">02 · Web app · Live</div>
         <h3 class="project-name">Winnipeg Camera Check</h3>
@@ -290,9 +272,9 @@
 
       <!-- GibbsNet -->
       <article class="project-card project-card--media reveal">
-        <div class="project-cover project-cover--figure">
-          <img src="assets/projects/gibbsnet.webp" width="1190" height="376" loading="lazy" decoding="async"
-               alt="GibbsNet output: the original square, the same image with Gaussian noise, and the denoised result">
+        <div class="project-cover">
+          <img src="assets/projects/gibbsnet.webp" width="1200" height="675" loading="lazy" decoding="async"
+               alt="GibbsNet output: a noisy greyscale image beside the denoised result">
         </div>
         <div class="project-num">03 · Probabilistic AI</div>
         <h3 class="project-name">GibbsNet</h3>
@@ -307,8 +289,8 @@
 
       <!-- DigitVision -->
       <article class="project-card project-card--media reveal">
-        <div class="project-cover project-cover--figure">
-          <img src="assets/projects/digitvision.webp" width="952" height="408" loading="lazy" decoding="async"
+        <div class="project-cover">
+          <img src="assets/projects/digitvision.webp" width="1200" height="675" loading="lazy" decoding="async"
                alt="Ten random MNIST training digits with their labels, plotted by DigitVision">
         </div>
         <div class="project-num">04 · Computer vision</div>
@@ -322,6 +304,9 @@
         </div>
       </article>
 
+    </div>
+
+    <div class="projects-grid">
       <!-- Next.js work at Norima -->
       <article class="project-card reveal">
         <div class="project-num">05 · Full-stack</div>
